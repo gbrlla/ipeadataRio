@@ -1,0 +1,6 @@
+drv1 <- "PostgreSQL"
+dbname1 <- "dv_raisid"
+host1 <- "postgresql-rj.ipea.gov.br"
+port1 <- 5432
+user1 <- "i3geo"
+password1 <- "ipea001"
