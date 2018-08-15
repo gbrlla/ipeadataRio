@@ -7,3 +7,4 @@ situavar
 autolog.csv
 conPostgreSQL.csv
 ipeadataRio.Rproj
+.gitignore
