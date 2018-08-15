@@ -146,16 +146,6 @@ encontra.serie <- function(serie, plotar = TRUE)
 }
 
 # --------------------------------------------------------- #
-# AREA DE TESTE ---------------------------------------- 
-A <- encontra.serie(serie = ("SGS366_CDI"))
-B <- encontra.serie(serie = c("diária","gm366_dow366","gm12_DOW12"),plotar = FALSE)
-C <- encontra.serie(serie = c("ABATE12"),plotar = FALSE)
-D <- encontra.serie(serie = c("serie que n existe"))
-E <- encontra.serie(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"),plotar = )
-F <- encontra.serie(serie = c("ABATE12_ABQUBO12","ABATE12_ABQUBV12"))
-# --------------------------------------------------------- #
-
-# --------------------------------------------------------- #
 # DESCRIÇÃO BREVE:
 # - Esta rotina retorna o atraso das series.
 # - A busca pode ser feita pelo codigo, periodicidade ou status.
@@ -283,7 +273,7 @@ situavar <- function(serie, exportar = TRUE, saida.aux = FALSE)
   {
     #------ Salvando relatorio
     xlsx::write.xlsx(x = saida,
-                     file = paste0("//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/PacoteIpeadataRio/situavar/situavar",
+                     file = paste0("//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/ipeadataRio/situavar/situavar",
                                    substr(Sys.time(),1,4),substr(Sys.time(),6,7),
                                    substr(Sys.time(),9,10),substr(Sys.time(),12,13),
                                    substr(Sys.time(),15,16),substr(Sys.time(),18,19),
@@ -314,20 +304,6 @@ situavar <- function(serie, exportar = TRUE, saida.aux = FALSE)
   #------ Resultado
   return(saida)
 }
-
-# --------------------------------------------------------- #
-# AREA DE TESTE ---------------------------------------- 
-# A <- situavar(serie = ("CONFAZ12"))
-B <- situavar(serie = c("mÈnSal"))
-# C <- situavar(serie = c("serie que n existe"))
-# D <- situavar(serie = c("BM12"))
-# E <- situavar(serie = c("diaria"))
-# F <- situavar(serie = c("PIMPFN12","GM366","ANDIMA4"))
-# F <- situavar(serie = c("IGP12","SECEX12"))
-# G <- situavar(serie = ("SECEX12"))
-H <- situavar(serie = ("TRIMESTRAL"))
-I <- situavar(serie = ("ANUAL"))
-# --------------------------------------------------------- #
 
 # --------------------------------------------------------- #
 # DESCRIÇÃO BREVE: 
@@ -441,14 +417,4 @@ dados.faltantes <- function(serie, plotar = TRUE)
   #------ Resultado
   return(saida2)
 }
-
-# --------------------------------------------------------- #
-# AREA DE TESTE ---------------------------------------- 
-A <- dados.faltantes(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
-B <- dados.faltantes(serie = c("mensal"),plotar = FALSE)
-C <- dados.faltantes(serie = c("CONFAZ12_ICMSAC12"))
-D <- dados.faltantes(serie = c("semestral"),plotar = FALSE)
-E <- dados.faltantes(serie = c("anual"),plotar = FALSE)
-F <- dados.faltantes(serie = c("diaria"),plotar = FALSE)
-# --------------------------------------------------------- #
 

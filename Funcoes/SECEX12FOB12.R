@@ -22,59 +22,6 @@ for (i in 1:length(pacotes))
 }
 rm(i,pacotes)
 
-GENERICAverif <- function(nomes)
-{
-  #------ Desligando notacao cientifica
-  options(scipen=999)
-  
-  #------ Organizando texto
-  nomes.int <- rep(",",length(nomes)*2+1)
-  nomes.int[seq(2,length(nomes)*2,2)] <- nomes
-  nomes.int[c(1,length(nomes.int))] <- rep("",2)
-  
-  # CARREGANDO METADADOS ----------------------------------------
-  
-  #------ Abrindo conexao
-  con <-  RODBC::odbcConnect("ipeadata",uid="",pwd="")
-  
-  #------ Consulta SQL 
-  serie <- RODBC::sqlQuery(con,
-                           paste0("SELECT ipea.vw_Valor.SERCODIGO, ", 
-                                  "CAST (ipea.vw_Valor.VALDATA as NUMERIC) as VALDATA, ",
-                                  "ipea.vw_Valor.VALVALOR FROM ipea.vw_Valor ",
-                                  "WHERE ipea.vw_Valor.SERCODIGO IN (",
-                                  paste(nomes.int, collapse = "'"),") ", 
-                                  "and ipea.vw_Valor.VALVALOR IS NOT NULL order by VALDATA;"))
-  
-  #------ Fechando conexao
-  RODBC::odbcClose(con)
-  
-  # ORGANIZANDO ----------------------------------------
-  
-  #------ Planilha Generica
-  GENERICAv <- data.frame(VALDATA = unique(serie$VALDATA))
-  for (i in 1:length(nomes))
-  {
-    GENERICAv <- merge(x = GENERICAv,
-                       y = subset(x = serie,subset = serie$SERCODIGO == nomes[i],
-                                  select = c("VALDATA","VALVALOR")),
-                       by = "VALDATA",
-                       all = TRUE)
-    names(GENERICAv)[i+1] <- nomes[i]
-  }
-  
-  #------ Editando formato de data
-  GENERICAv$VALDATA <- as.Date(GENERICAv$VALDATA, origin = "1900-01-01")
-  
-  #------ Removendo possivel linha de NA
-  GENERICAind <- data.frame(ind = is.na(GENERICAv[,-1]))
-  erros <- sum(rowSums(GENERICAind)==ncol(GENERICAind))
-  if(erros>0){GENERICAv <- GENERICAv[-which(rowSums(GENERICAind)==ncol(GENERICAind)),]}
-  
-  #------ Resultado
-  return(GENERICAv)
-}
-
 SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
 {
   # LENDOS DADOS --------------------------------------
@@ -83,10 +30,11 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
   message("Requisitando dados via PostgreSQL")
   
   #------ Codigo dos paises (DB interno)
+  codpaisesSECEX12FOB12 <- read.csv2("//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/ipeadataRio/DB/codpaisesSECEX12FOB12.csv")
   codpaises <- codpaisesSECEX12FOB12$cod_paises
   
   #------ Abrindo conexao
-  conAccess <- read.csv2("//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/PacoteIpeadataRio/conPostgreSQL.csv")
+  conAccess <- read.csv2("//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/ipeadataRio/conPostgreSQL.csv")
   
   con <- DBI::dbConnect(drv = as.character(conAccess$drv), 
                         dbname = as.character(conAccess$dbname), 
@@ -224,7 +172,7 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
     # ATUALIZANDO AUTOLOG --------------------------------------
     
     #------ Lendo autolog
-    autolog <- read.csv2(file = "//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/PacoteIpeadataRio/autolog.csv")
+    autolog <- read.csv2(file = "//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/ipeadataRio/autolog.csv")
     
     #------ Editando estrutura
     autolog$data.hora <- as.character(autolog$data.hora)
@@ -240,7 +188,7 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
     
     #------ Salvando autolog
     write.csv2(x = autolog,
-               file = "//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/PacoteIpeadataRio/autolog.csv",
+               file = "//Srjn3/area_corporativa/Projeto_IPEADATA/Geral/ipeadataRio/autolog.csv",
                row.names = FALSE)
     
     #------ Eliminando objetos 
@@ -262,9 +210,3 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
               GENERICA_IMPORTACAO = GENERICA_IMP))
   
 }
-
-# --------------------------------------------------------- #
-# AREA DE TESTE ---------------------------------------- 
-a <- Sys.time()
-A <- SECEX12FOB12(completa = TRUE)
-Sys.time()-a

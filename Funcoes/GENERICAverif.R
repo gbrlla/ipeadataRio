@@ -73,8 +73,3 @@ GENERICAverif <- function(nomes)
   #------ Resultado
   return(GENERICAv)
 }
-
-# --------------------------------------------------------- #
-# AREA DE TESTE ---------------------------------------- 
-nomes <- c("MTE12_SALMIN12","ABATE12_ABPENO12")
-A <- GENERICAverif(nomes = nomes)
