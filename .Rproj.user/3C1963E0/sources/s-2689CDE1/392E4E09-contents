@@ -1,0 +1,31 @@
+Package: ipeadataRio
+Title: Atualizacao e verificacao do IpeaData
+Version: 0.0.1
+Date: 2018-08-13
+Author: Luiz Eduardo Gomes, <luiz.gomes@ipea.gov.br>, <gomes.leduardo@gmail.com>
+Maintainer: Luiz Eduardo Gomes, <luiz.gomes@ipea.gov.br>, <gomes.leduardo@gmail.com>
+Description: Auxiliar na atualizacao e verificacao da qualidade das series temporais do IpeaData <http://www.ipeadata.gov.br>.
+Depends: R (>= 3.3.3)
+License: MIT + file LICENSE
+Encoding: UTF-8
+URL: https://gitlab.com/ipeadata/ipeadataRio
+BugReports: https://gitlab.com/ipeadata/ipeadataRio/issues
+LazyData: true
+RoxygenNote: 6.1.0
+Imports: mvtnorm,
+         forecast,
+         Matrix,
+         matrixStats,
+         corpcor,
+         DBI,
+         RCurl,
+         curl,
+         XML,
+         RPostgreSQL,
+         httr,
+         xml2,
+         rvest,
+         dplyr,
+         xlsx,
+         RODBC,
+         dygraphs
