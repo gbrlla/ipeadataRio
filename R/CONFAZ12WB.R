@@ -6,36 +6,9 @@
 # --------------------------------------------------------- #
 # |   PROGRAMADOR: LUIZ EDUARDO S. GOMES                  | #
 # --------------------------------------------------------- #
-# |   CONFAZ 12 - WEBSCRAPPING                            | #
+# |   CONFAZ - WEBSCRAPPING                               | #
 # --------------------------------------------------------- #
 
-#' @title CONFAZ12 - \emph{Webscrapping}
-#' 
-#' @description Realiza a raspagem de dados referentes ao banco CONFAZ12 a partir do 
-#' endereco \emph{online} \url{https://www.confaz.fazenda.gov.br/legislacao/boletim-do-icms} e
-#' exporta a planilha \code{GENERICA} no diretorio especifico do ETL 
-#' (\code{\\\Srjn3\area_corporativa\Projeto_IPEADATA\ETL\Generica}).
-#' 
-#' @param gerarGen Logico. Se \code{gerarGen = TRUE}, a planilha \code{GENERICA} e 
-#' atualizada no diretorio especifico do \emph{ETL}. O \emph{default} e \code{TRUE}.
-#'
-#' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
-#'
-#' @details O Conselho Nacional de Politica Fazendaria (CONFAZ) emite valores que 
-#' eventualmente possuem erros de grandeza, \emph{e.g.} multiplicado ou dividido por 1000. 
-#' Assim, e utilizado um Modelo Linear Dinamico Multivariado (\emph{West e Harrison, 1997}) 
-#' para suavizar possiveis distorcoes.
-#' 
-#' @references West, M. e Harrison, P. (1997). \emph{Bayesian forecasting and dynamic models}. 
-#' 2nd ed. Springer Verlag, New York.
-#'  
-#' @examples
-#' #------ Exportando a planilha GENERICA no diretorio.
-#' confaz1 <- CONFAZ12WB()
-#' 
-#' #------ Nao exportando. (Indicado para quem nao possui acesso a pasta do ETL)
-#' confaz2 <- CONFAZ12WB(gerarGen = FALSE)
-#' 
 #' @export
 #' 
 #' @importFrom stats na.exclude
