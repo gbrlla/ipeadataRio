@@ -195,7 +195,7 @@ encontra.serie <- function(serie, plotar = TRUE)
 #' sit1 <- situavar(serie = c("PIMPFN12","GM366","ANDIMA4","CONFAZ12_ICMSSP12"))
 #' 
 #' #------ Periodicidade e bancos
-#' sit2 <- encontra.serie(serie = c("diaria","IGP12"))
+#' sit2 <- situavar(serie = c("diaria","IGP12"))
 #'                          
 #' #------ Serie nao existente (retorna erro)
 #' erro <- situavar(serie = c("serie que n existe"))
@@ -303,12 +303,13 @@ situavar <- function(serie, exportar = TRUE)
   {
     #------ Salvando relatorio
     xlsx::write.xlsx(x = saida,
-                     file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","situavar","situavar",
-                                      substr(Sys.time(),1,4),substr(Sys.time(),6,7),
+                     file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral",
+                                      "PacoteIpeadataRio","situavar",
+                                      paste0("situavar",
                                       substr(Sys.time(),1,4),substr(Sys.time(),6,7),
                                       substr(Sys.time(),9,10),substr(Sys.time(),12,13),
                                       substr(Sys.time(),15,16),substr(Sys.time(),18,19),
-                                      ifelse(length(serie)==1,paste0("_",serie),""),".xls"),
+                                      ifelse(length(serie)==1,paste0("_",serie),""),".xls")),
                      sheetName="Generica", row.names=FALSE, showNA=FALSE)
   }
   
