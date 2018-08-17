@@ -21,8 +21,6 @@ O pacote é composto pelas funções:
 
 * *situavar*: Retorna a situação das séries requeridas do IpeaData.
 
-* *exportar*: Exporta relatórios .csv gerados a partir de *situavar*.
-
 ## Requisitos
 
 É necessário estar com o *Open Database Connectivity* (ODBC) configurado para permissão de acesso ao banco de dados IpeaData. 
