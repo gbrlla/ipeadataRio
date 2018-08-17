@@ -47,7 +47,7 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
   codpaises <- codpaisesSECEX12FOB12$cod_paises
   
   #------ Abrindo conexao
-  conAccess <- utils::read.csv2(file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","ipeadataRio","conPostgreSQL.csv"))
+  conAccess <- utils::read.csv2(file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","conPostgreSQL.csv"))
   
   con <- DBI::dbConnect(drv = as.character(conAccess$drv), 
                         dbname = as.character(conAccess$dbname), 
@@ -186,7 +186,7 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
     # ATUALIZANDO AUTOLOG --------------------------------------
     
     #------ Lendo autolog
-    autolog <- utils::read.csv2(file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","ipeadataRio","autolog.csv"))
+    autolog <- utils::read.csv2(file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","autolog.csv"))
     
     #------ Editando estrutura
     autolog$data.hora <- as.character(autolog$data.hora)
@@ -202,7 +202,7 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
     
     #------ Salvando autolog
     utils::write.csv2(x = autolog,
-                      file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","ipeadataRio","autolog.csv"),
+                      file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","autolog.csv"),
                       row.names = FALSE)
     
     #------ Eliminando objetos 
