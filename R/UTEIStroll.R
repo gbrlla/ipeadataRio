@@ -328,9 +328,10 @@ situavar <- function(serie, exportar = TRUE)
   cat("Numero de Variaveis \n")
   cat(paste("Total .................................",nrow(metadados)),"\n")
   cat(paste("Atualizadas ...........................",sum(metadados$STATUS_ATRASO==0,na.rm = T)),"\n")
-  cat(paste("Desatualizadas ........................",sum(metadados$STATUS_ATRASO>0,na.rm = T)),"\n")
+  cat(paste("Desatualizadas ........................",max(0,sum(metadados$STATUS_ATRASO>0,na.rm = T)-sum(metadados$SERMAXDATA>Sys.Date(),na.rm = T))),"\n")
   cat(paste("Inativas ..............................",sum(metadados$STATUS_ATRASO==-.5,na.rm = T)),"\n")
   cat(paste("Erro ou Data maior que", Sys.Date(), ".....",sum(metadados$SERMAXDATA>Sys.Date(),na.rm = T)),"\n")
+  cat(paste("Metadados nao preenchidos  ............",sum(is.na(metadados$STATUS_ATRASO))),"\n")
   cat("\n")
   
   #------ Resultado
