@@ -16,6 +16,34 @@
 # - Quando nenhuma serie e encotrada, retorna erro.
 # --------------------------------------------------------- #
 
+#' @title Encontra series
+#' 
+#' @description Encontra series a partir do \code{SERCODIGOTROLL},
+#' \emph{banco}, \emph{periodicidade} e/ou \emph{status}.
+#' 
+#' @param serie Vetor contendo o \code{SERCODIGOTROLL} da(s) serie(s) requisitada(s).
+#' 
+#' @param plotar Logico. Se \code{plotar = TRUE}, o grafico da(s) serie(s) e(sao) exibidos. 
+#' O \emph{default} e \code{TRUE}.
+#'
+#' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
+#'
+#' @note Foi limitado a exibicao de ate 5 (cinco) series simultaneamente.
+#'  
+#' @examples
+#' #------ Serie unica, exibindo grafico
+#' serie1 <- encontra.serie(serie = ("SGS366_CDI"))
+#' 
+#' #------ Multiplas series, exibindo grafico
+#' serie2 <- encontra.serie(serie = c("ABATE12_ABQUBO12","ABATE12_ABQUBV12"))
+#' 
+#' #------ Multiplas series, nao exibindo grafico
+#' serie3 <- encontra.serie(serie = c("gm12","ABATE12_ABPENO12","MTE12_SALMIN12"),
+#'                          plotar = FALSE)
+#'                          
+#' #------ Serie nao existente (retorna erro)
+#' erro <- encontra.serie(serie = c("serie que n existe"))
+#' 
 #' @export
 
 encontra.serie <- function(serie, plotar = TRUE)
@@ -144,9 +172,37 @@ encontra.serie <- function(serie, plotar = TRUE)
 # - Quando nenhuma serie e encotrada, retorna erro.
 # --------------------------------------------------------- #
 
+#' @title Situacao das series
+#' 
+#' @description Retorna a situacao das series com relacao a atraso a partir do \code{SERCODIGOTROLL},
+#' \emph{banco}, \emph{periodicidade} e/ou \emph{status}.
+#' 
+#' @param serie Vetor contendo o \code{SERCODIGOTROLL},\emph{banco}, \emph{periodicidade}
+#'  e/ou \emph{status} da(s) serie(s) requisitada(s).
+#' 
+#' @param exportar Logico. Se \code{exportar = TRUE}, um relatorio \code{.xls} e exportado para o
+#' diretorio do \code{situavar} (\code{///Srjn3/area_corporativa/Projeto_IPEADATA/Geral/PacoteIpeadataRio/situavar}).
+#' O \emph{default} e \code{TRUE}.
+#'
+#' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
+#'
+#' @note A nomenclatura dada ao arquivo sera \emph{situavarAAAAMMDDhhmmss.xls}.
+#' Quando \code{serie} e unitario, o arquivo e nomeado da forma padrao com a 
+#' adicao do conteudo de \code{serie}.
+#'  
+#' @examples
+#' #------ Multiplos Bancos e serie
+#' sit1 <- situavar(serie = c("PIMPFN12","GM366","ANDIMA4","CONFAZ12_ICMSSP12"))
+#' 
+#' #------ Periodicidade e bancos
+#' sit2 <- encontra.serie(serie = c("diaria","IGP12"))
+#'                          
+#' #------ Serie nao existente (retorna erro)
+#' erro <- situavar(serie = c("serie que n existe"))
+#' 
 #' @export
 
-situavar <- function(serie, exportar = TRUE, saida.aux = FALSE)
+situavar <- function(serie, exportar = TRUE)
 {
   #------ Organizando texto - Removendo duplicatas, acentos e colocando em maiusculo 
   serie <- unique(toupper(iconv(serie,to="ASCII//TRANSLIT")))
@@ -242,28 +298,8 @@ situavar <- function(serie, exportar = TRUE, saida.aux = FALSE)
                                       tolower(substr(x = metadados$PERID2,start = 2,stop = 99))),
                       Responsavel = metadados$SERRESPONSAVEL)
   
-  if(saida.aux)
-  {
-    #------ Banco auxiliar 
-    saida <- data.frame(Variavel = metadados$SERCODIGOTROLL, 
-                        Data_Inicial = metadados$SERMINDATA, 
-                        Data_Final = metadados$SERMAXDATA,
-                        Defasagem_Dias = metadados$SERPRAZOATUALIZACAO,
-                        Situacao = ifelse(test = metadados$STATUS_ATRASO==0 | metadados$STATUS_ATRASO==999999999,
-                                          yes = 0,no = metadados$STATUS_ATRASO),
-                        Periodicidade = paste0(substr(x = metadados$PERID2,start = 1,stop = 1),
-                                               tolower(substr(x = metadados$PERID2,start = 2,stop = 99))),
-                        Responsavel = metadados$SERRESPONSAVEL)
-    
-    #------ Substituindo
-    saida$Situacao <- ifelse(test = saida$Situacao < 0,
-                             yes = 0,
-                             no = saida$Situacao)
-  }
-
-  
   #------ Exportar?
-  if(exportar & !saida.aux)
+  if(exportar)
   {
     #------ Salvando relatorio
     xlsx::write.xlsx(x = saida,
@@ -307,6 +343,31 @@ situavar <- function(serie, exportar = TRUE, saida.aux = FALSE)
 # - Quando nenhuma serie e encotrada, retorna erro.
 # --------------------------------------------------------- #
 
+#' @title Descontinuidade
+#' 
+#' @description Retorna a descontinuidade existente nas series a partir do \code{SERCODIGOTROLL},
+#' \emph{banco}, \emph{periodicidade} e/ou \emph{status}.
+#' 
+#' @param serie Vetor contendo o \code{SERCODIGOTROLL},\emph{banco}, \emph{periodicidade}
+#'  e/ou \emph{status} da(s) serie(s) requisitada(s).
+#' 
+#' @param plotar Logico. Se \code{plotar = TRUE}, o grafico da(s) serie(s) e(sao) exibidos. 
+#' O \emph{default} e \code{TRUE}.
+#'
+#' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
+#'
+#' @note Foi limitado a exibicao de ate 5 (cinco) series simultaneamente.
+#'  
+#' @examples
+#' #------ Multiplas series, exibindo grafico
+#' desc1 <- dados.faltantes(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
+#' 
+#' #------ Banco, nao exibindo grafico
+#' desc2 <- encontra.serie(serie = c("TRIMESTRAL"),plotar = FALSE) # pode demandar tempo!
+#' 
+#' #------ Plotando mais de 5 series, retorna erro
+#' erro <- encontra.serie(serie = c("TRIMESTRAL")) # pode demandar tempo!
+#' 
 #' @export
 
 dados.faltantes <- function(serie, plotar = TRUE)

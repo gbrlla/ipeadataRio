@@ -9,6 +9,31 @@
 # |   SECEX12 VIA SQL                                     | #
 # --------------------------------------------------------- #
 
+#' @title SECEX12FOB12
+#' 
+#' @description Realiza a ordenacao e organizacao dos dados referentes ao 
+#' banco SECEX12 (FOB12) a partir do banco SQL interno e exporta a planilha \code{GENERICA} 
+#' no diretorio especifico do ETL 
+#' (\code{\\\Srjn3\area_corporativa\Projeto_IPEADATA\ETL\Generica}).
+#' 
+#' @param gerarGen Logico. Se \code{gerarGen = TRUE}, a planilha \code{GENERICA} e 
+#' atualizada no diretorio especifico do \emph{ETL}. O \emph{default} e \code{TRUE}.
+#' 
+#' @param completa Logico. Se \code{completa = FALSE}, e requisitado apenas os ultimos
+#' 10 anos da serie temporal. Se \code{completa = TRUE}, a serie temporal completa e requisitada,
+#' demandando tempo. O \emph{default} e \code{FALSE}. 
+#'
+#' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
+#'
+#' @note Quando nao ha informacao disponivel, o valor 0 (zero) e atribuido.
+#'  
+#' @examples
+#' #------ Exportando a planilha GENERICA no diretorio.
+#' fob1 <- SECEX12FOB12()
+#' 
+#' #------ Nao exportando. (Indicado para quem nao possui acesso a pasta do ETL)
+#' fob2 <- SECEX12FOB12(gerarGen = FALSE)
+#' 
 #' @export
 
 SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)

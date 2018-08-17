@@ -1,8 +1,11 @@
 Package: ipeadataRio
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Title: Atualizacao e verificacao do IpeaData
+Version: 0.0.1
+Author: Luiz Eduardo Gomes, <luiz.gomes@ipea.gov.br>, <gomes.leduardo@gmail.com>
+Maintainer: Luiz Eduardo Gomes, <luiz.gomes@ipea.gov.br>, <gomes.leduardo@gmail.com>
+Description: Auxilia a equipe Rio na atualizacao e verificao das series no IpeaData. 
+             Contem automatizacoes de busca de dados, geras e funcoes que assistem no 
+             controle de qualidade do conteudo publicado.
 Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -31,7 +34,6 @@ Imports: mvtnorm,
          stats,
          utils
 Suggests:
-    knitr,
     devtools,
     roxygen2
-URL: https://kbroman.org/qtlcharts
+URL: https://gitlab.com/ipeadata/ipeadataRio
