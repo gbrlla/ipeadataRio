@@ -181,8 +181,7 @@ encontra.serie <- function(serie, plotar = TRUE)
 #'  e/ou \emph{status} da(s) serie(s) requisitada(s).
 #'
 #' @param exportar Logico. Se \code{exportar = TRUE}, um relatorio \code{.xls} e exportado para o
-#' diretorio do \code{situavar} (\code{///Srjn3/area_corporativa/Projeto_IPEADATA/Geral/PacoteIpeadataRio/situavar}).
-#' O \emph{default} e \code{TRUE}.
+#' diretorio do \code{situavar}. O \emph{default} e \code{TRUE}.
 #'
 #' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
 #'

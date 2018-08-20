@@ -11,8 +11,7 @@ situavar(serie, exportar = TRUE)
 e/ou \emph{status} da(s) serie(s) requisitada(s).}
 
 \item{exportar}{Logico. Se \code{exportar = TRUE}, um relatorio \code{.xls} e exportado para o
-diretorio do \code{situavar} (\code{///Srjn3/area_corporativa/Projeto_IPEADATA/Geral/PacoteIpeadataRio/situavar}).
-O \emph{default} e \code{TRUE}.}
+diretorio do \code{situavar}. O \emph{default} e \code{TRUE}.}
 }
 \description{
 Retorna a situacao das series com relacao a atraso a partir do \code{SERCODIGOTROLL},
