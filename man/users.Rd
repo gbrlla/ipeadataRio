@@ -4,7 +4,7 @@
 \name{users}
 \alias{users}
 \title{Registro dos usuarios IpeaData}
-\format{um data frame com 10 observacao(oes) e 3 variavel(is):
+\format{Banco de dados com 10 observacao(oes) e 3 variavel(is):
 \describe{
   \item{Usuario}{Login do usuario}
   \item{Nome}{Nome do usuario}

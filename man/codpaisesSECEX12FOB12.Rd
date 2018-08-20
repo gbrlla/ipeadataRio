@@ -3,10 +3,10 @@
 \docType{data}
 \name{codpaisesSECEX12FOB12}
 \alias{codpaisesSECEX12FOB12}
-\title{Codigo dos paises - SECEX MDIC}
-\format{um data frame com 252 observacao(oes) e 1 variavel(is):
+\title{Codigos dos paises - SECEX MDIC}
+\format{Banco de dados com 252 observacao(oes) e 1 variavel(is):
 \describe{
-  \item{cod_paises}{Codigo dos paises}
+  \item{cod_paises}{Codigo dos pais}
 }}
 \source{
 \url{http://www.mdic.gov.br/arquivos/dwnl_1362158650.pdf}
@@ -15,6 +15,6 @@
 codpaisesSECEX12FOB12
 }
 \description{
-Conjunto de dados contendo o codigo dos paises utilizado pela SECEX/MDIC.
+Conjunto de dados contendo os codigos dos paises utilizado pela SECEX/MDIC.
 }
 \keyword{datasets}

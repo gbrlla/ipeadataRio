@@ -3,8 +3,8 @@
 \docType{data}
 \name{codterritCONFAZ12}
 \alias{codterritCONFAZ12}
-\title{Codigo dos territorios - CONFAZ}
-\format{um data frame com 86 observacao(oes) e 3 variavel(is):
+\title{Codigos dos territorios - CONFAZ}
+\format{Banco de dados com 86 observacao(oes) e 3 variavel(is):
 \describe{
   \item{conta}{Tipo de variavel}
   \item{territorio}{UF}
@@ -14,6 +14,6 @@
 codterritCONFAZ12
 }
 \description{
-Conjunto de dados contendo o codigo dos territorios utilizado pela CONFAZ.
+Conjunto de dados contendo os codigos dos territorios utilizado pela CONFAZ.
 }
 \keyword{datasets}
