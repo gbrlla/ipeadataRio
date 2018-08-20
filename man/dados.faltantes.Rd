@@ -25,10 +25,10 @@ Foi limitado a exibicao de ate 5 (cinco) series simultaneamente.
 desc1 <- dados.faltantes(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 
 #------ Banco, nao exibindo grafico
-desc2 <- encontra.serie(serie = c("TRIMESTRAL"),plotar = FALSE) # pode demandar tempo!
+desc2 <- dados.faltantes(serie = c("TRIMESTRAL"),plotar = FALSE) # pode demandar tempo!
 
 #------ Plotando mais de 5 series, retorna erro
-erro <- encontra.serie(serie = c("TRIMESTRAL")) # pode demandar tempo!
+erro <- dados.faltantes(serie = c("TRIMESTRAL")) # pode demandar tempo!
 
 }
 \author{
