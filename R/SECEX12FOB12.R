@@ -9,13 +9,13 @@
 # |   SECEX12 VIA SQL                                     | #
 # --------------------------------------------------------- #
 
-#' @title Codigo dos paises - SECEX MDIC
+#' @title Codigos dos paises - SECEX MDIC
 #'
-#' @description Conjunto de dados contendo o codigo dos paises utilizado pela SECEX/MDIC.
+#' @description Conjunto de dados contendo os codigos dos paises utilizado pela SECEX/MDIC.
 #'
-#' @format um data frame com 252 observacao(oes) e 1 variavel(is):
+#' @format Banco de dados com 252 observacao(oes) e 1 variavel(is):
 #' \describe{
-#'   \item{cod_paises}{Codigo dos paises}
+#'   \item{cod_paises}{Codigo dos pais}
 #' }
 #' @source \url{http://www.mdic.gov.br/arquivos/dwnl_1362158650.pdf}
 

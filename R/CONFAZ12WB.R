@@ -13,7 +13,7 @@
 #'
 #' @description Conjunto de dados contendo informacoes dos membros da equipe para registro interno.
 #'
-#' @format um data frame com 10 observacao(oes) e 3 variavel(is):
+#' @format Banco de dados com 10 observacao(oes) e 3 variavel(is):
 #' \describe{
 #'   \item{Usuario}{Login do usuario}
 #'   \item{Nome}{Nome do usuario}
@@ -22,11 +22,11 @@
 
 "users"
 
-#' @title Codigo dos territorios - CONFAZ
+#' @title Codigos dos territorios - CONFAZ
 #'
-#' @description Conjunto de dados contendo o codigo dos territorios utilizado pela CONFAZ.
+#' @description Conjunto de dados contendo os codigos dos territorios utilizado pela CONFAZ.
 #'
-#' @format um data frame com 86 observacao(oes) e 3 variavel(is):
+#' @format Banco de dados com 86 observacao(oes) e 3 variavel(is):
 #' \describe{
 #'   \item{conta}{Tipo de variavel}
 #'   \item{territorio}{UF}
