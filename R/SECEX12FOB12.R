@@ -60,40 +60,40 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
   #------ Abrindo conexao
   conAccess <- utils::read.csv2(file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","conPostgreSQL.csv"))
 
-  con <- DBI::dbConnect(drv = as.character(conAccess$drv),
-                        dbname = as.character(conAccess$dbname),
-                        host = as.character(conAccess$host),
-                        port = conAccess$port,
-                        user = as.character(conAccess$user),
-                        password = as.character(conAccess$password))
+  con <- RPostgreSQL::dbConnect(drv = as.character(conAccess$drv),
+                                dbname = as.character(conAccess$dbname),
+                                host = as.character(conAccess$host),
+                                port = conAccess$port,
+                                user = as.character(conAccess$user),
+                                password = as.character(conAccess$password))
 
   #------ Requerendo dados pelo SQL
-  paises_exp <- DBI::dbGetQuery(con,
-                                paste0("SELECT num_ano,num_mes,
-                                       SUM(num_valor_fob) AS valor, cod_pais
-                                       FROM public.vw_comercio_exterior2
-                                       WHERE imp_exp='e' AND num_ano>=",
-                                       ifelse(completa,1990,(as.POSIXlt(Sys.Date()))$year+1900-10),
-                                       "AND cod_pais IN (",
-                                       paste0(codpaises,
-                                              collapse = ", "),")
-                                       GROUP BY num_ano,num_mes,
-                                       cod_pais,nme_pais;"))
+  paises_exp <- RPostgreSQL::dbGetQuery(con,
+                                        paste0("SELECT num_ano,num_mes,
+                                                SUM(num_valor_fob) AS valor, cod_pais
+                                                FROM public.vw_comercio_exterior2
+                                                WHERE imp_exp='e' AND num_ano>=",
+                                                ifelse(completa,1990,(as.POSIXlt(Sys.Date()))$year+1900-10),
+                                                "AND cod_pais IN (",
+                                                paste0(codpaises,
+                                                collapse = ", "),")
+                                                GROUP BY num_ano,num_mes,
+                                                cod_pais,nme_pais;"))
 
-  paises_imp <- DBI::dbGetQuery(con,
-                                paste0("SELECT num_ano,num_mes,
-                                       SUM(num_valor_fob) AS valor, cod_pais
-                                       FROM public.vw_comercio_exterior2
-                                       WHERE imp_exp='i' AND num_ano>=",
-                                       ifelse(completa,1990,(as.POSIXlt(Sys.Date()))$year+1900-10),
-                                       "AND cod_pais IN (",
-                                       paste0(codpaises,
-                                              collapse = ", "),")
-                                       GROUP BY num_ano,num_mes,
-                                       cod_pais,nme_pais;"))
+  paises_imp <- RPostgreSQL::dbGetQuery(con,
+                                        paste0("SELECT num_ano,num_mes,
+                                                SUM(num_valor_fob) AS valor, cod_pais
+                                                FROM public.vw_comercio_exterior2
+                                                WHERE imp_exp='i' AND num_ano>=",
+                                                ifelse(completa,1990,(as.POSIXlt(Sys.Date()))$year+1900-10),
+                                                "AND cod_pais IN (",
+                                                paste0(codpaises,
+                                                collapse = ", "),")
+                                                GROUP BY num_ano,num_mes,
+                                                cod_pais,nme_pais;"))
 
   #------ Fechando conexao
-  DBI::dbDisconnect(conn = con)
+  RPostgreSQL::dbDisconnect(conn = con)
 
   # ORGANIZANDO --------------------------------------
 
