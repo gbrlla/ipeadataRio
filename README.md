@@ -15,14 +15,12 @@ devtools::install_git("https://gitlab.com/ipeadata/ipeadataRio", force = TRUE)
 library(ipeadataRio)
 ````
 
-## Uso
+## Manual
 
-O pacote é composto pelas funções:
-
-* *situavar*: Retorna a situação das séries requeridas do IpeaData.
+Para informações mais detalhadas juntamente com exemplos de uso, consulte o manual [aqui](https://drive.google.com/open?id=1UPR2FZrslwlmQ448OOTNWNju5vkGBfFk).
 
 ## Requisitos
 
 É necessário estar com o *Open Database Connectivity* (ODBC) configurado para permissão de acesso ao banco de dados IpeaData. 
 
-**Somente para uso interno**
+**SOMENTE PARA USO INTERNO**
