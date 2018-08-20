@@ -11,7 +11,7 @@
 O pacote encontra-se disponível somente no **GitLab**. Sua instalação e carga é feita a partir de:
 
 ```{r eval=FALSE}
-devtools::install_git("https://gitlab.com/ipeadata/ipeadataRio", force = TRUE)
+devtools::install_git("https://gitlab.com/ipeadata/ipeadataRio")
 library(ipeadataRio)
 ````
 
