@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' #------ Multiplas series, exibindo grafico
-#' gen_verif <- GENERICAverif(nomes = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
+#' gen_verif <- GENERICAverif(nomes = c("GM12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 #'
 #' @export
 
