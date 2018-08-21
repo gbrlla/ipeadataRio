@@ -33,6 +33,7 @@ GENERICAverif <- function(nomes)
   nomes.int <- rep(",",length(nomes)*2+1)
   nomes.int[seq(2,length(nomes)*2,2)] <- nomes
   nomes.int[c(1,length(nomes.int))] <- rep("",2)
+  nomes.int <- toupper(nomes.int)
 
   # CARREGANDO METADADOS ----------------------------------------
 
