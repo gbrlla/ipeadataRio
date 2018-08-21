@@ -29,11 +29,13 @@ GENERICAverif <- function(nomes)
   #------ Desligando notacao cientifica
   options(scipen=999)
 
+  #------ Removendo duplicatas, acentos e letra minuscula
+  nomes <- unique(toupper(iconv(nomes,to="ASCII//TRANSLIT")))
+
   #------ Organizando texto
   nomes.int <- rep(",",length(nomes)*2+1)
   nomes.int[seq(2,length(nomes)*2,2)] <- nomes
   nomes.int[c(1,length(nomes.int))] <- rep("",2)
-  nomes.int <- toupper(nomes.int)
 
   # CARREGANDO METADADOS ----------------------------------------
 
