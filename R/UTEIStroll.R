@@ -196,6 +196,20 @@ encontraSerie <- function(serie, plotar = TRUE)
 #' @param exportar Logico. Se \code{exportar = TRUE}, um relatorio \code{.xls} e exportado para o
 #' diretorio do \code{situavar}. O \emph{default} e \code{TRUE}.
 #'
+#' @details
+#' Para series \emph{DIARIAS}, a data de referencia sera dada pelo dia corrente.
+#'
+#' Para series \emph{MENSAIS}, \emph{TRIMESTRAIS} E \emph{SEMESTRAIS},
+#' a data de referencia sera dada por YYYY-MM-01.
+#'
+#' Para series \emph{ANUAIS} em diante, a data de referencia sera dada por YYYY-01-01.
+#'
+#' Assim, o \emph{default} para series \emph{DIARIAS} e estarem atualizadas no mesmo dia e
+#' para as restantes, e estarem atualizadas na unidade de tempo anterior.
+#'
+#' Calculo:
+#' Se \bold{(Data de referencia - Defasagem - Data final > 0)} entao a serie esta atrasada.
+#'
 #' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
 #'
 #' @note A nomenclatura dada ao arquivo sera \emph{situavarAAAAMMDDhhmmss.xls}.
