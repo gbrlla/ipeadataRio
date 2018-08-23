@@ -32,21 +32,21 @@
 #'
 #' @examples
 #' #------ Serie unica, exibindo grafico
-#' serie1 <- encontra.serie(serie = ("SGS366_CDI"))
+#' serie1 <- encontraSerie(serie = ("SGS366_CDI"))
 #'
 #' #------ Multiplas series, exibindo grafico
-#' serie2 <- encontra.serie(serie = c("ABATE12_ABQUBO12","ABATE12_ABQUBV12"))
+#' serie2 <- encontraSerie(serie = c("ABATE12_ABQUBO12","ABATE12_ABQUBV12"))
 #'
 #' #------ Multiplas series, nao exibindo grafico
-#' serie3 <- encontra.serie(serie = c("gm12","ABATE12_ABPENO12","MTE12_SALMIN12"),
+#' serie3 <- encontraSerie(serie = c("gm12","ABATE12_ABPENO12","MTE12_SALMIN12"),
 #'                          plotar = FALSE)
 #'
 #' #------ Serie nao existente (retorna erro)
-#' erro <- encontra.serie(serie = c("serie que n existe"))
+#' erro <- encontraSerie(serie = c("serie que n existe"))
 #'
 #' @export
 
-encontra.serie <- function(serie, plotar = TRUE)
+encontraSerie <- function(serie, plotar = TRUE)
 {
   #------ Desligando notacao cientifica
   options(scipen=999)
@@ -128,7 +128,7 @@ encontra.serie <- function(serie, plotar = TRUE)
   if(plotar & nrow(serinput) <= 5 & length(unique(serinput$PERID))==1)
   {
     #------ Requisitando valores
-    generica.aux <- GENERICAverif(nomes = serinput$SERCODIGOTROLL)
+    generica.aux <- genericaVerif(nomes = serinput$SERCODIGOTROLL)
 
     #------ Condições para o banco de dados
     aux.data <- NA
@@ -176,7 +176,7 @@ encontra.serie <- function(serie, plotar = TRUE)
 #'   \item{Responsavel}{Nome do responsavel}
 #' }
 
-"serresponsavel"
+"responsavel.series"
 
 # --------------------------------------------------------- #
 # DESCRIÇÃO BREVE:
@@ -220,7 +220,7 @@ situavar <- function(serie, exportar = TRUE)
   serie <- unique(toupper(iconv(serie,to="ASCII//TRANSLIT")))
 
   #------ Encontrando a serie
-  serinput <- encontra.serie(serie = serie,plotar = FALSE)
+  serinput <- encontraSerie(serie = serie,plotar = FALSE)
 
   #------ Desligando notacao cientifica
   options(scipen=999)
@@ -311,7 +311,7 @@ situavar <- function(serie, exportar = TRUE)
                       Responsavel = metadados$SERRESPONSAVEL)
 
   #------ Substituindo responsaveis
-  serres <- serresponsavel
+  serres <- responsavel.series
   saida <- merge(x = saida[,-7],y = serres,by = "Variavel",all.x = TRUE,sort = FALSE)
 
   #------ Exportar?
@@ -378,23 +378,23 @@ situavar <- function(serie, exportar = TRUE)
 #'
 #' @examples
 #' #------ Multiplas series, exibindo grafico
-#' desc1 <- dados.faltantes(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
+#' desc1 <- dadosFaltantes(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 #'
 #' #------ Banco, nao exibindo grafico
-#' desc2 <- dados.faltantes(serie = c("TRIMESTRAL"),plotar = FALSE) # pode demandar tempo!
+#' desc2 <- dadosFaltantes(serie = c("TRIMESTRAL"),plotar = FALSE) # pode demandar tempo!
 #'
 #' #------ Plotando mais de 5 series, retorna erro
-#' erro <- dados.faltantes(serie = c("TRIMESTRAL")) # pode demandar tempo!
+#' erro <- dadosFaltantes(serie = c("TRIMESTRAL")) # pode demandar tempo!
 #'
 #' @export
 
-dados.faltantes <- function(serie, plotar = TRUE)
+dadosFaltantes <- function(serie, plotar = TRUE)
 {
   #------ Organizando texto - Removendo duplicatas, acentos e colocando em maiusculo
   serie <- unique(toupper(iconv(serie,to="ASCII//TRANSLIT")))
 
   #------ Encontrando a serie
-  serinput <- encontra.serie(serie = serie,plotar = plotar)
+  serinput <- encontraSerie(serie = serie,plotar = plotar)
 
   #------ Retornando erro se possui series diarias
   if(sum(serinput$PERID=="DIARIA")>0) stop("Series com periodicidade DIARIA nao sao aplicaveis")

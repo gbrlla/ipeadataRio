@@ -19,9 +19,9 @@
 #' }
 #' @source \url{http://www.mdic.gov.br/arquivos/dwnl_1362158650.pdf}
 
-"codpaisesSECEX12FOB12"
+"codpaises.SECEX12FOB12"
 
-#' @title SECEX12FOB12
+#' @title SECEX12FOB12 via SQL
 #'
 #' @description Realiza a ordenacao e organizacao dos dados referentes ao
 #' banco SECEX12 (FOB12) a partir do banco SQL interno e exporta a planilha \code{GENERICA}
@@ -40,14 +40,14 @@
 #'
 #' @examples
 #' #------ Exportando a planilha GENERICA no diretorio.
-#' fob1 <- SECEX12FOB12()
+#' fob1 <- SECEX12FOB12wb()
 #'
 #' #------ Nao exportando. (Indicado para quem nao possui acesso a pasta do ETL)
-#' fob2 <- SECEX12FOB12(gerarGen = FALSE)
+#' fob2 <- SECEX12FOB12wb(gerarGen = FALSE)
 #'
 #' @export
 
-SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
+SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
 {
   # LENDOS DADOS --------------------------------------
 
@@ -55,7 +55,7 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
   message("Requisitando dados via PostgreSQL")
 
   #------ Codigo dos paises (DB interno)
-  codpaises <- codpaisesSECEX12FOB12$cod_paises
+  codpaises <- codpaises.SECEX12FOB12$cod_paises
 
   #------ Abrindo conexao
   conAccess <- utils::read.csv2(file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","conPostgreSQL.csv"))
@@ -150,8 +150,8 @@ SECEX12FOB12 <- function(gerarGen = TRUE, completa = FALSE)
   rm(codpaises,conAccess,con,i,paises_exp,paises_imp,exportacao,importacao)
 
   #------ Comparando valores
-  VALORES.BASE_EXP <- GENERICAverif(nomes = names(GENERICA_EXP)[-1])
-  VALORES.BASE_IMP <- GENERICAverif(nomes = names(GENERICA_IMP)[-1])
+  VALORES.BASE_EXP <- genericaVerif(nomes = names(GENERICA_EXP)[-1])
+  VALORES.BASE_IMP <- genericaVerif(nomes = names(GENERICA_IMP)[-1])
 
   #------ Organizando data
   VALORES.BASE_EXP$VALDATA <- VALORES.BASE_EXP$VALDATA + 14

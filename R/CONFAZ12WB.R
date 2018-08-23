@@ -20,7 +20,7 @@
 #'   \item{Email}{E-mail}
 #' }
 
-"users"
+"users.ipeadata"
 
 #' @title Codigos dos territorios - CONFAZ
 #'
@@ -33,7 +33,7 @@
 #'   \item{codtroll}{\code{SERCODIGOTROLL}}
 #' }
 
-"codterritCONFAZ12"
+"codterrit.CONFAZ12"
 
 #' @title CONFAZ12 - \emph{Webscrapping}
 #'
@@ -56,22 +56,22 @@
 #'
 #' @examples
 #' #------ Exportando a planilha GENERICA no diretorio.
-#' confaz1 <- CONFAZ12WB()
+#' confaz1 <- CONFAZ12wb()
 #'
 #' #------ Nao exportando. (Indicado para quem nao possui acesso a pasta do ETL)
-#' confaz2 <- CONFAZ12WB(gerarGen = FALSE)
+#' confaz2 <- CONFAZ12wb(gerarGen = FALSE)
 #'
 #' @export
 #'
 #' @importFrom stats na.exclude
 #' @importFrom utils setTxtProgressBar txtProgressBar
 
-CONFAZ12WB <- function(gerarGen = TRUE)
+CONFAZ12wb <- function(gerarGen = TRUE)
 {
   # WEBSCRAPPING ----------------------------------------------
 
   #------ Codigo dos paises (DB interno)
-  codterrit <- codterritCONFAZ12
+  codterrit <- codterrit.CONFAZ12
 
   #------ Desligando notacao cientifica
   options(scipen=999)
@@ -519,7 +519,7 @@ CONFAZ12WB <- function(gerarGen = TRUE)
   }
 
   #------ Comparando valores
-  VALORES.BASE <- GENERICAverif(nomes = names(GENERICA)[-1])
+  VALORES.BASE <- genericaVerif(nomes = names(GENERICA)[-1])
 
   #------ Organizando data
   VALORES.BASE$VALDATA <- VALORES.BASE$VALDATA + 14
