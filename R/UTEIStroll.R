@@ -165,6 +165,19 @@ encontra.serie <- function(serie, plotar = TRUE)
   return(serinput)
 }
 
+#' @title Registro dos responsaveis das series do IpeaData (Macro)
+#'
+#' @description Conjunto de dados contendo informacoes dos responsaveis das
+#' series do IpeaData (Macro) para registro interno.
+#'
+#' @format Banco de dados com 11042 observacao(oes) e 2 variavel(is):
+#' \describe{
+#'   \item{SERCODIGOTROL}{Codigo das series}
+#'   \item{SERRESPONSAVEL}{Nome do responsavel}
+#' }
+
+"serresponsavel"
+
 # --------------------------------------------------------- #
 # DESCRIÇÃO BREVE:
 # - Esta rotina retorna o atraso das series.
@@ -296,6 +309,11 @@ situavar <- function(serie, exportar = TRUE)
                       Periodicidade = paste0(substr(x = metadados$PERID2,start = 1,stop = 1),
                                       tolower(substr(x = metadados$PERID2,start = 2,stop = 99))),
                       Responsavel = metadados$SERRESPONSAVEL)
+
+  #------ Substituindo responsaveis
+  serres <- serresponsavel
+  names(serres) <- c("Variavel","Responsavel")
+  saida <- merge(x = saida[,-7],y = serres,by = "Variavel",all.x = TRUE,sort = FALSE)
 
   #------ Exportar?
   if(exportar)
