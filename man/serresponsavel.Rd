@@ -6,8 +6,8 @@
 \title{Registro dos responsaveis das series do IpeaData (Macro)}
 \format{Banco de dados com 11042 observacao(oes) e 2 variavel(is):
 \describe{
-  \item{SERCODIGOTROL}{Codigo das series}
-  \item{SERRESPONSAVEL}{Nome do responsavel}
+  \item{Variavel}{Codigo das series}
+  \item{Responsavel}{Nome do responsavel}
 }}
 \usage{
 serresponsavel
