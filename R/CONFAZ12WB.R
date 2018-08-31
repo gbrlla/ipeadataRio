@@ -71,7 +71,7 @@ CONFAZ12wb <- function(gerarGen = TRUE)
   # WEBSCRAPPING ----------------------------------------------
 
   #------ Codigo dos paises (DB interno)
-  codterrit <- codterrit.CONFAZ12
+  codterrit <- ipeadataRio::codterrit.CONFAZ12
 
   #------ Desligando notacao cientifica
   options(scipen=999)

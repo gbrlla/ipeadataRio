@@ -325,7 +325,7 @@ situavar <- function(serie, exportar = TRUE)
                       Responsavel = metadados$SERRESPONSAVEL)
 
   #------ Substituindo responsaveis
-  serres <- responsavel.series
+  serres <- ipeadataRio::responsavel.series
   saida <- merge(x = saida[,-7],y = serres,by = "Variavel",all.x = TRUE,sort = FALSE)
 
   #------ Exportar?

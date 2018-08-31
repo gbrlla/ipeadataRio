@@ -55,7 +55,7 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
   message("Requisitando dados via PostgreSQL")
 
   #------ Codigo dos paises (DB interno)
-  codpaises <- codpaises.SECEX12FOB12$cod_paises
+  codpaises <- ipeadataRio::codpaises.SECEX12FOB12$cod_paises
 
   #------ Abrindo conexao
   conAccess <- utils::read.csv2(file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","conPostgreSQL.csv"))
