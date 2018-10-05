@@ -100,9 +100,9 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
   #------ Texto informativo
   message("Configurando planilha de atualizacao")
 
-  exportacao <- data.frame(SERCODIGO = paste0("SECEX12_X",ifelse(nchar(as.character(paises_exp$cod_pais))==1,
+  exportacao <- data.frame(SERCODIGO = paste0("SECEX12_X",ifelse(nchar(as.character(paises_exp$cod_pais)) == 1,
                                                                  paste0("00",paises_exp$cod_pais),
-                                                                 ifelse(nchar(as.character(paises_exp$cod_pais))==2,
+                                                                 ifelse(nchar(as.character(paises_exp$cod_pais)) == 2,
                                                                         paste0("0",paises_exp$cod_pais),
                                                                         paises_exp$cod_pais)),
                                               "FOB12"),
@@ -110,9 +110,9 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
                            VALVALOR = paises_exp$valor)
   exportacao <- exportacao[order(exportacao$SERCODIGO,exportacao$VALDATA),]
 
-  importacao <- data.frame(SERCODIGO = paste0("SECEX12_M",ifelse(nchar(as.character(paises_imp$cod_pais))==1,
+  importacao <- data.frame(SERCODIGO = paste0("SECEX12_M",ifelse(nchar(as.character(paises_imp$cod_pais)) == 1,
                                                                  paste0("00",paises_imp$cod_pais),
-                                                                 ifelse(nchar(as.character(paises_imp$cod_pais))==2,
+                                                                 ifelse(nchar(as.character(paises_imp$cod_pais)) == 2,
                                                                         paste0("0",paises_imp$cod_pais),
                                                                         paises_imp$cod_pais)),
                                               "FOB12"),
@@ -128,7 +128,7 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
     GENERICA_EXP <- merge(GENERICA_EXP,
                           subset(exportacao,
                                  exportacao$SERCODIGO == as.character(unique(exportacao$SERCODIGO))[i])[,-1],
-                          by = "VALDATA",all = TRUE)
+                          by = "VALDATA", all = TRUE)
     names(GENERICA_EXP)[i+1] <- as.character(unique(exportacao$SERCODIGO))[i]
   }
 
@@ -138,7 +138,7 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
     GENERICA_IMP <- merge(GENERICA_IMP,
                           subset(importacao,
                                  importacao$SERCODIGO == as.character(unique(importacao$SERCODIGO))[i])[,-1],
-                          by = "VALDATA",all = TRUE)
+                          by = "VALDATA", all = TRUE)
     names(GENERICA_IMP)[i+1] <- as.character(unique(importacao$SERCODIGO))[i]
   }
 
@@ -187,11 +187,11 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
 
     #------ Exportando xls
     xlsx::write.xlsx(x = GENERICA_EXP,
-                     file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","ETL","Generica","GENERICA_SECEX12exp.xls"),
+                     file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","ETL","Generica","SECEX12EXP_Generica.xls"),
                      sheetName="Generica", row.names=FALSE, showNA=FALSE)
 
     xlsx::write.xlsx(x = GENERICA_IMP,
-                     file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","ETL","Generica","GENERICA_SECEX12imp.xls"),
+                     file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","ETL","Generica","SECEX12IMP_Generica.xls"),
                      sheetName="Generica", row.names=FALSE, showNA=FALSE)
 
     # ATUALIZANDO AUTOLOG --------------------------------------
@@ -206,7 +206,7 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
 
     #------ Atualizando com credenciais
     r <- nrow(autolog) + 1
-    autolog[r,] <- c(as.character(Sys.time()),Sys.getenv("USERNAME"),"GENERICA_SECEX12")
+    autolog[r,] <- c(as.character(Sys.time()),Sys.getenv("USERNAME"),"SECEX12_Generica")
 
     #------ Ordenando
     autolog <- autolog[order(x = autolog$data.hora,decreasing = TRUE),]
@@ -231,7 +231,7 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
   cat("\n")
 
   #------ Resultado
-  return(list(GENERICA_EXPORTACAO = GENERICA_EXP,
-              GENERICA_IMPORTACAO = GENERICA_IMP))
+  return(list(SECEX12EXP_Generica = GENERICA_EXP,
+              SECEX12IMP_Generica = GENERICA_IMP))
 
 }

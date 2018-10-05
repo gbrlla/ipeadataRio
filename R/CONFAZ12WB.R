@@ -546,7 +546,7 @@ CONFAZ12wb <- function(gerarGen = TRUE)
 
     #------ Exportando xls
     xlsx::write.xlsx(x = GENERICA,
-                     file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","ETL","Generica","GENERICA_CONFAZ12.xls"),
+                     file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","ETL","Generica","CONFAZ12_Generica.xls"),
                      sheetName="Generica", row.names=FALSE, showNA=FALSE)
 
     # ATUALIZANDO AUTOLOG --------------------------------------
@@ -561,7 +561,7 @@ CONFAZ12wb <- function(gerarGen = TRUE)
 
     #------ Atualizando com credenciais
     r <- nrow(autolog) + 1
-    autolog[r,] <- c(as.character(Sys.time()),Sys.getenv("USERNAME"),"GENERICA_CONFAZ12")
+    autolog[r,] <- c(as.character(Sys.time()),Sys.getenv("USERNAME"),"CONFAZ12_Generica")
 
     #------ Ordenando
     autolog <- autolog[order(x = autolog$data.hora,decreasing = TRUE),]
