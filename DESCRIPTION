@@ -1,6 +1,6 @@
 Package: ipeadataRio
 Title: Atualizacao e verificacao do IpeaData
-Version: 0.0.1
+Version: 0.1.1
 Author: Luiz Eduardo Gomes, <luiz.gomes@ipea.gov.br>, <gomes.leduardo@gmail.com>
 Maintainer: Luiz Eduardo Gomes, <luiz.gomes@ipea.gov.br>, <gomes.leduardo@gmail.com>
 Description: Auxilia a equipe Rio na atualizacao e verificao das series no IpeaData. 
@@ -11,34 +11,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
-Imports: mvtnorm, 
-         forecast, 
-         Matrix, 
-         matrixStats,
-         corpcor, 
-         DBI, 
-         Rcpp,
-         stringi,
-         stringr,
-         selectr,
-         magrittr,
-         RCurl, 
-         curl, 
-         XML,
-         RPostgreSQL,
-         httr,
-         xml2, 
-         rvest,
-         dplyr,
-         xlsx,
-         dygraphs,
-         grDevices,
-         graphics,
-         xts,
-         RODBC,
-         stats,
-         utils
+Imports: mvtnorm, forecast, Matrix, matrixStats, corpcor, DBI, Rcpp, stringi, stringr, selectr, magrittr, RCurl, curl, 
+         XML, RPostgreSQL, httr, xml2, rvest, dplyr, xlsx, dygraphs, grDevices, graphics, xts, RODBC, stats, utils
 Suggests:
-    devtools,
-    roxygen2
+    devtools, roxygen2
 URL: https://gitlab.com/ipeadata/ipeadataRio
