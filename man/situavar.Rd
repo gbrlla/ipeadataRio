@@ -21,9 +21,9 @@ Retorna a situacao das series com relacao a atraso a partir do \code{SERCODIGOTR
 Para series \emph{DIARIAS}, a data de referencia sera dada pelo dia corrente.
 
 Para series \emph{MENSAIS}, \emph{TRIMESTRAIS} E \emph{SEMESTRAIS},
-a data de referencia sera dada por YYYY-MM-01.
+a data de referencia sera dada por AAAA-MM-01.
 
-Para series \emph{ANUAIS} em diante, a data de referencia sera dada por YYYY-01-01.
+Para series \emph{ANUAIS} em diante, a data de referencia sera dada por AAAA-01-01.
 
 Assim, o \emph{default} para series \emph{DIARIAS} e estarem atualizadas no mesmo dia e
 para as restantes, e estarem atualizadas na unidade de tempo anterior.
