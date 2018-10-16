@@ -4,23 +4,16 @@
 \name{listadepaises.Mercosul}
 \alias{listadepaises.Mercosul}
 \title{Lista dos paises - MERCOSUL - SECEX MDIC}
-\format{Banco de dados com 468 observacao(oes) e 15 variavel(is):
+\format{Banco de dados com 468 observacao(oes) e 8 variavel(is):
 \describe{
   \item{"Datas"}{Datas}
   \item{"cod_membro_1"}{Codigo do membro 1}
-  \item{"nome_membro_1"}{Nome do membro 1}
-  \item{"cod_membro_1"}{Codigo do membro 2}
-  \item{"nome_membro_1"}{Nome do membro 2}
-  \item{"cod_membro_1"}{Codigo do membro 3}
-  \item{"nome_membro_1"}{Nome do membro 3}
-  \item{"cod_membro_1"}{Codigo do membro 4}
-  \item{"nome_membro_1"}{Nome do membro 4}
-  \item{"cod_membro_1"}{Codigo do membro 5}
-  \item{"nome_membro_1"}{Nome do membro 5}
-  \item{"cod_membro_1"}{Codigo do membro 6}
-  \item{"nome_membro_1"}{Nome do membro 6}
-  \item{"cod_membro_1"}{Codigo do membro 7}
-  \item{"nome_membro_1"}{Nome do membro 7}
+  \item{"cod_membro_2"}{Codigo do membro 2}
+  \item{"cod_membro_3"}{Codigo do membro 3}
+  \item{"cod_membro_4"}{Codigo do membro 4}
+  \item{"cod_membro_5"}{Codigo do membro 5}
+  \item{"cod_membro_6"}{Codigo do membro 6}
+  \item{"cod_membro_7"}{Codigo do membro 7}
 }}
 \source{
 \url{https://pt.wikipedia.org/wiki/Mercado_Comum_do_Sul#Membros}

@@ -4,15 +4,11 @@
 \name{codpaises.SECEX12FOB12}
 \alias{codpaises.SECEX12FOB12}
 \title{Codigos dos paises - SECEX MDIC}
-\format{Banco de dados com 278 observacao(oes) e 7 variavel(is):
+\format{Banco de dados com 278 observacao(oes) e 3 variavel(is):
 \describe{
   \item{"CO_PAIS"}{Codigo dos pais}
-  \item{"CO_PAIS_ISON3"}{Codigo dos pais (ISO3 - Numerico)}
-  \item{"CO_PAIS_ISOA3"}{Codigo dos pais (ISO3 - Alfanumerico)}
-  \item{"NO_PAIS"}{Nome dos pais}
   \item{"NO_PAIS_ING"}{Nome dos pais (ingles)}
   \item{"TERRIT_PAISES"}{Codigo de territorio (Numerico)}
-  \item{"TERRITB_PAISES"}{Codigo de alfanumerico (Numerico)}
 }}
 \source{
 \url{http://www.mdic.gov.br/arquivos/dwnl_1362158650.pdf}
