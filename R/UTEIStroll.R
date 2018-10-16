@@ -178,6 +178,19 @@ encontraSerie <- function(serie, plotar = TRUE)
 
 "responsavel.series"
 
+#' @title Registro das series automaticas
+#'
+#' @description Registro das series obtidas de forma automatica via Gera, Webscrapping, SQL ou API.
+#'
+#' @format Banco de dados com 896 observacao(oes) e 3 variavel(is):
+#' \describe{
+#'   \item{codtroll}{Codigo das series}
+#'   \item{tipo}{Tipo do metodo de atualizacao}
+#'   \item{funcao}{Nome da funcao}
+#' }
+
+"series.automaticas"
+
 # --------------------------------------------------------- #
 # DESCRIÇÃO BREVE:
 # - Esta rotina retorna o atraso das series.
@@ -200,9 +213,9 @@ encontraSerie <- function(serie, plotar = TRUE)
 #' Para series \emph{DIARIAS}, a data de referencia sera dada pelo dia corrente.
 #'
 #' Para series \emph{MENSAIS}, \emph{TRIMESTRAIS} E \emph{SEMESTRAIS},
-#' a data de referencia sera dada por YYYY-MM-01.
+#' a data de referencia sera dada por AAAA-MM-01.
 #'
-#' Para series \emph{ANUAIS} em diante, a data de referencia sera dada por YYYY-01-01.
+#' Para series \emph{ANUAIS} em diante, a data de referencia sera dada por AAAA-01-01.
 #'
 #' Assim, o \emph{default} para series \emph{DIARIAS} e estarem atualizadas no mesmo dia e
 #' para as restantes, e estarem atualizadas na unidade de tempo anterior.
@@ -271,8 +284,8 @@ situavar <- function(serie, exportar = TRUE)
   # --------------------------------------------------------- #
   # IMPORTANTE:
   # - Para series DIARIAS, a data de referencia sera dada pelo dia corrente.
-  # - Para series MENSAIS, TRIMESTRAIS E SEMESTRAIS, a data de referencia sera dada por YYYY-MM-01.
-  # - Para series ANUAIS em diante, a data de referencia sera dada por YYYY-01-01.
+  # - Para series MENSAIS, TRIMESTRAIS E SEMESTRAIS, a data de referencia sera dada por AAAA-MM-01.
+  # - Para series ANUAIS em diante, a data de referencia sera dada por AAAA-01-01.
   # --------------------------------------------------------- #
 
   data.ref <- as.Date(paste0((as.POSIXlt(Sys.Date())$year)+1900,"-",

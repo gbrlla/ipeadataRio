@@ -32,11 +32,6 @@ genericaVerif <- function(nomes)
   #------ Removendo duplicatas, acentos e letra minuscula
   nomes <- unique(toupper(iconv(nomes,to="ASCII//TRANSLIT")))
 
-  #------ Organizando texto
-  nomes.int <- rep(",",length(nomes)*2+1)
-  nomes.int[seq(2,length(nomes)*2,2)] <- nomes
-  nomes.int[c(1,length(nomes.int))] <- rep("",2)
-
   # CARREGANDO METADADOS ----------------------------------------
 
   #------ Abrindo conexao
@@ -48,7 +43,7 @@ genericaVerif <- function(nomes)
                                   "CAST (ipea.vw_Valor.VALDATA as NUMERIC) as VALDATA, ",
                                   "ipea.vw_Valor.VALVALOR FROM ipea.vw_Valor ",
                                   "WHERE ipea.vw_Valor.SERCODIGO IN (",
-                                  paste(nomes.int, collapse = "'"),") ",
+                                  paste0("'",nomes,"'", collapse = ", "),") ",
                                   "and ipea.vw_Valor.VALVALOR IS NOT NULL order by VALDATA;"))
 
   #------ Fechando conexao

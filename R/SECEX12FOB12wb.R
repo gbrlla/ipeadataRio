@@ -13,13 +13,99 @@
 #'
 #' @description Conjunto de dados contendo os codigos dos paises utilizado pela SECEX/MDIC.
 #'
-#' @format Banco de dados com 252 observacao(oes) e 1 variavel(is):
+#' @format Banco de dados com 278 observacao(oes) e 7 variavel(is):
 #' \describe{
-#'   \item{cod_paises}{Codigo dos pais}
+#'   \item{"CO_PAIS"}{Codigo dos pais}
+#'   \item{"CO_PAIS_ISON3"}{Codigo dos pais (ISO3 - Numerico)}
+#'   \item{"CO_PAIS_ISOA3"}{Codigo dos pais (ISO3 - Alfanumerico)}
+#'   \item{"NO_PAIS"}{Nome dos pais}
+#'   \item{"NO_PAIS_ING"}{Nome dos pais (ingles)}
+#'   \item{"TERRIT_PAISES"}{Codigo de territorio (Numerico)}
+#'   \item{"TERRITB_PAISES"}{Codigo de alfanumerico (Numerico)}
 #' }
 #' @source \url{http://www.mdic.gov.br/arquivos/dwnl_1362158650.pdf}
 
 "codpaises.SECEX12FOB12"
+
+#' @title Lista dos paises - MERCOSUL - SECEX MDIC
+#'
+#' @description Conjunto de dados contendo os codigos dos paises do MERCOSUL utilizado pela SECEX/MDIC.
+#'
+#' @format Banco de dados com 468 observacao(oes) e 15 variavel(is):
+#' \describe{
+#'   \item{"Datas"}{Datas}
+#'   \item{"cod_membro_1"}{Codigo do membro 1}
+#'   \item{"nome_membro_1"}{Nome do membro 1}
+#'   \item{"cod_membro_1"}{Codigo do membro 2}
+#'   \item{"nome_membro_1"}{Nome do membro 2}
+#'   \item{"cod_membro_1"}{Codigo do membro 3}
+#'   \item{"nome_membro_1"}{Nome do membro 3}
+#'   \item{"cod_membro_1"}{Codigo do membro 4}
+#'   \item{"nome_membro_1"}{Nome do membro 4}
+#'   \item{"cod_membro_1"}{Codigo do membro 5}
+#'   \item{"nome_membro_1"}{Nome do membro 5}
+#'   \item{"cod_membro_1"}{Codigo do membro 6}
+#'   \item{"nome_membro_1"}{Nome do membro 6}
+#'   \item{"cod_membro_1"}{Codigo do membro 7}
+#'   \item{"nome_membro_1"}{Nome do membro 7}
+#' }
+#'
+#' @source \url{https://pt.wikipedia.org/wiki/Mercado_Comum_do_Sul#Membros}
+
+"listadepaises.Mercosul"
+
+#' @title Lista dos paises - ZONA DO EURO - SECEX MDIC
+#'
+#' @description Conjunto de dados contendo os codigos dos paises da Zona do Euro utilizado pela SECEX/MDIC.
+#'
+#' @format Banco de dados com 39 observacao(oes) e 41 variavel(is):
+#' \describe{
+#'   \item{"Datas"}{Datas}
+#'   \item{"cod_membro_1"}{Codigo do membro 1}
+#'   \item{"nome_membro_1"}{Nome do membro 1}
+#'   \item{"cod_membro_2"}{Codigo do membro 2}
+#'   \item{"nome_membro_2"}{Nome do membro 2}
+#'   \item{"cod_membro_3"}{Codigo do membro 3}
+#'   \item{"nome_membro_3"}{Nome do membro 3}
+#'   \item{"cod_membro_4"}{Codigo do membro 4}
+#'   \item{"nome_membro_4"}{Nome do membro 4}
+#'   \item{"cod_membro_5"}{Codigo do membro 5}
+#'   \item{"nome_membro_5"}{Nome do membro 5}
+#'   \item{"cod_membro_6"}{Codigo do membro 6}
+#'   \item{"nome_membro_6"}{Nome do membro 6}
+#'   \item{"cod_membro_7"}{Codigo do membro 7}
+#'   \item{"nome_membro_7"}{Nome do membro 7}
+#'   \item{"cod_membro_8"}{Codigo do membro 8}
+#'   \item{"nome_membro_8"}{Nome do membro 8}
+#'   \item{"cod_membro_9"}{Codigo do membro 9}
+#'   \item{"nome_membro_9"}{Nome do membro 9}
+#'   \item{"cod_membro_10"}{Codigo do membro 10}
+#'   \item{"nome_membro_10"}{Nome do membro 10}
+#'   \item{"cod_membro_11"}{Codigo do membro 11}
+#'   \item{"nome_membro_11"}{Nome do membro 11}
+#'   \item{"cod_membro_12"}{Codigo do membro 12}
+#'   \item{"nome_membro_12"}{Nome do membro 12}
+#'   \item{"cod_membro_13"}{Codigo do membro 13}
+#'   \item{"nome_membro_13"}{Nome do membro 13}
+#'   \item{"cod_membro_14"}{Codigo do membro 14}
+#'   \item{"nome_membro_14"}{Nome do membro 14}
+#'   \item{"cod_membro_15"}{Codigo do membro 15}
+#'   \item{"nome_membro_15"}{Nome do membro 15}
+#'   \item{"cod_membro_16"}{Codigo do membro 16}
+#'   \item{"nome_membro_16"}{Nome do membro 16}
+#'   \item{"cod_membro_17"}{Codigo do membro 17}
+#'   \item{"nome_membro_17"}{Nome do membro 17}
+#'   \item{"cod_membro_18"}{Codigo do membro 18}
+#'   \item{"nome_membro_18"}{Nome do membro 18}
+#'   \item{"cod_membro_19"}{Codigo do membro 19}
+#'   \item{"nome_membro_19"}{Nome do membro 19}
+#'   \item{"cod_membro_20"}{Codigo do membro 20}
+#'   \item{"nome_membro_20"}{Nome do membro 20}
+#' }
+#'
+#' @source \url{https://pt.wikipedia.org/wiki/Zona_Euro#Membros}
+
+"listadepaises.ZE"
 
 #' @title SECEX12FOB12 via SQL
 #'
@@ -70,27 +156,27 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
   #------ Requerendo dados pelo SQL
   paises_exp <- RPostgreSQL::dbGetQuery(con,
                                         paste0("SELECT num_ano,num_mes,
-                                                SUM(num_valor_fob) AS valor, cod_pais
-                                                FROM public.vw_comercio_exterior2
-                                                WHERE imp_exp='e' AND num_ano>=",
-                                                ifelse(completa,1990,(as.POSIXlt(Sys.Date()))$year+1900-10),
-                                                "AND cod_pais IN (",
-                                                paste0(codpaises,
-                                                collapse = ", "),")
-                                                GROUP BY num_ano,num_mes,
-                                                cod_pais,nme_pais;"))
+                                               SUM(num_valor_fob) AS valor, cod_pais
+                                               FROM public.vw_comercio_exterior_urf
+                                               WHERE imp_exp='e' AND num_ano>=",
+                                               ifelse(completa,1990,(as.POSIXlt(Sys.Date()))$year+1900-10),
+                                               "AND cod_pais IN (",
+                                               paste0(codpaises,
+                                                      collapse = ", "),")
+                                               GROUP BY num_ano,num_mes,
+                                               cod_pais,nme_pais;"))
 
   paises_imp <- RPostgreSQL::dbGetQuery(con,
                                         paste0("SELECT num_ano,num_mes,
-                                                SUM(num_valor_fob) AS valor, cod_pais
-                                                FROM public.vw_comercio_exterior2
-                                                WHERE imp_exp='i' AND num_ano>=",
-                                                ifelse(completa,1990,(as.POSIXlt(Sys.Date()))$year+1900-10),
-                                                "AND cod_pais IN (",
-                                                paste0(codpaises,
-                                                collapse = ", "),")
-                                                GROUP BY num_ano,num_mes,
-                                                cod_pais,nme_pais;"))
+                                               SUM(num_valor_fob) AS valor, cod_pais
+                                               FROM public.vw_comercio_exterior_urf
+                                               WHERE imp_exp='i' AND num_ano>=",
+                                               ifelse(completa,1990,(as.POSIXlt(Sys.Date()))$year+1900-10),
+                                               "AND cod_pais IN (",
+                                               paste0(codpaises,
+                                                      collapse = ", "),")
+                                               GROUP BY num_ano,num_mes,
+                                               cod_pais,nme_pais;"))
 
   #------ Fechando conexao
   RPostgreSQL::dbDisconnect(conn = con)
@@ -166,15 +252,15 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
 
   #------ Atualizar?
   atualizar <- FALSE
-  if((nrow(GENERICA_EXP)>nrow(VALORES.BASE2_EXP))|
-     (nrow(GENERICA_IMP)>nrow(VALORES.BASE2_IMP))){atualizar <- TRUE}
-  if((nrow(GENERICA_EXP)==nrow(VALORES.BASE2_EXP)))
+  if((nrow(GENERICA_EXP) > nrow(VALORES.BASE2_EXP))|
+     (nrow(GENERICA_IMP) > nrow(VALORES.BASE2_IMP))){atualizar <- TRUE}
+  if((nrow(GENERICA_EXP) == nrow(VALORES.BASE2_EXP)))
   {
-    if(sum(VALORES.BASE2_EXP[,-1]!=GENERICA_EXP[,-1],na.rm = TRUE)>0){atualizar <- TRUE}
+    if(sum(VALORES.BASE2_EXP[,-1] != GENERICA_EXP[,-1],na.rm = TRUE) > 0){atualizar <- TRUE}
   }
-  if((nrow(GENERICA_IMP)==nrow(VALORES.BASE2_IMP)))
+  if((nrow(GENERICA_IMP) == nrow(VALORES.BASE2_IMP)))
   {
-    if(sum(VALORES.BASE2_IMP[,-1]!=GENERICA_IMP[,-1],na.rm = TRUE)>0){atualizar <- TRUE}
+    if(sum(VALORES.BASE2_IMP[,-1] != GENERICA_IMP[,-1],na.rm = TRUE) > 0){atualizar <- TRUE}
   }
 
   if(gerarGen & atualizar)
@@ -193,32 +279,32 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
     xlsx::write.xlsx(x = GENERICA_IMP,
                      file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","ETL","Generica","SECEX12IMP_Generica.xls"),
                      sheetName="Generica", row.names=FALSE, showNA=FALSE)
-
-    # ATUALIZANDO AUTOLOG --------------------------------------
-
-    #------ Lendo autolog
-    autolog <- utils::read.csv2(file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","autolog.csv"))
-
-    #------ Editando estrutura
-    autolog$data.hora <- as.character(autolog$data.hora)
-    autolog$usuario <- as.character(autolog$usuario)
-    autolog$acao <- as.character(autolog$acao)
-
-    #------ Atualizando com credenciais
-    r <- nrow(autolog) + 1
-    autolog[r,] <- c(as.character(Sys.time()),Sys.getenv("USERNAME"),"SECEX12_Generica")
-
-    #------ Ordenando
-    autolog <- autolog[order(x = autolog$data.hora,decreasing = TRUE),]
-
-    #------ Salvando autolog
-    utils::write.csv2(x = autolog,
-                      file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","autolog.csv"),
-                      row.names = FALSE)
-
-    #------ Eliminando objetos
-    rm(autolog,r)
   }
+
+  # ATUALIZANDO AUTOLOG --------------------------------------
+
+  #------ Lendo autolog
+  autolog <- utils::read.csv2(file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","autolog.csv"))
+
+  #------ Editando estrutura
+  autolog$data.hora <- as.character(autolog$data.hora)
+  autolog$usuario <- as.character(autolog$usuario)
+  autolog$acao <- as.character(autolog$acao)
+
+  #------ Atualizando com credenciais
+  r <- nrow(autolog) + 1
+  autolog[r,] <- c(as.character(Sys.time()),Sys.getenv("USERNAME"),"SECEX12_Generica")
+
+  #------ Ordenando
+  autolog <- autolog[order(x = autolog$data.hora,decreasing = TRUE),]
+
+  #------ Salvando autolog
+  utils::write.csv2(x = autolog,
+                    file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral","PacoteIpeadataRio","autolog.csv"),
+                    row.names = FALSE)
+
+  #------ Eliminando objetos
+  rm(autolog,r)
 
   # TEXTO RESUMO ----------------------------------------
 
