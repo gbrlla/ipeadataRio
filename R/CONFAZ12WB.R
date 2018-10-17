@@ -530,13 +530,13 @@ CONFAZ12wb <- function(gerarGen = TRUE)
 
   #------ Atualizar?
   atualizar <- FALSE
-  if(nrow(GENERICA)>nrow(VALORES.BASE2)){atualizar <- TRUE}
-  if(nrow(GENERICA)==nrow(VALORES.BASE2))
+  if (nrow(GENERICA) > nrow(VALORES.BASE2)){atualizar <- TRUE}
+  if (nrow(GENERICA) == nrow(VALORES.BASE2))
   {
-    if(sum(VALORES.BASE2[,-1]!=GENERICA[,-1],na.rm = TRUE)>0){atualizar <- TRUE}
+    if (sum(VALORES.BASE2[,-1] != GENERICA[,-1],na.rm = TRUE)>0){atualizar <- TRUE}
   }
 
-  if(gerarGen & atualizar)
+  if (gerarGen & atualizar)
   {
     #------ Texto informativo
     message(paste("Exportando planilha de atualizacao para",
@@ -547,7 +547,7 @@ CONFAZ12wb <- function(gerarGen = TRUE)
     #------ Exportando xls
     xlsx::write.xlsx(x = GENERICA,
                      file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","ETL","Generica","CONFAZ12_Generica.xls"),
-                     sheetName="Generica", row.names=FALSE, showNA=FALSE)
+                     sheetName="Generica", row.names = FALSE, showNA = FALSE)
 
     # ATUALIZANDO AUTOLOG --------------------------------------
 
