@@ -291,9 +291,9 @@ situavar <- function(serie, exportar = TRUE)
   # - Para series ANUAIS em diante, a data de referencia sera dada por AAAA-01-01.
   # --------------------------------------------------------- #
 
-  data.ref <- as.Date(paste0((as.POSIXlt(Sys.Date())$year)+1900,"-",
-                             ifelse(metadados$PERID[1]>=12,"01",as.POSIXlt(Sys.Date())$mon+1),"-",
-                             ifelse(metadados$PERID[1]!=-1,"01",as.POSIXlt(Sys.Date())$mday)))
+  data.ref <- as.Date(paste0((as.POSIXlt(Sys.Date())$year) + 1900, "-",
+                             ifelse(metadados$PERID[1] >= 12,"01", as.POSIXlt(Sys.Date())$mon + 1),"-",
+                             ifelse(metadados$PERID[1] != -1, "01", as.POSIXlt(Sys.Date())$mday)))
 
   # --------------------------------------------------------- #
   # OBSERVACAO:
@@ -306,18 +306,22 @@ situavar <- function(serie, exportar = TRUE)
   # --------------------------------------------------------- #
 
   # ------ Calculando
-  metadados$STATUS_ATRASO <- ifelse(metadados$SERSTATUS=="A",
-                                    ifelse(as.numeric(data.ref-metadados$SERPRAZOATUALIZACAO-metadados$SERMAXDATA)>0,
-                                           as.numeric(Sys.Date()-metadados$SERPRAZOATUALIZACAO-metadados$SERMAXDATA)-
-                                             2*(30*ifelse(metadados$PERID==-1,0,metadados$PERID)),
-                                           0),
-                                    -.5)
+  metadados$STATUS_ATRASO <- ifelse(test = metadados$SERSTATUS == "A",
+                                    yes = ifelse(test = as.numeric(data.ref - metadados$SERPRAZOATUALIZACAO - metadados$SERMAXDATA) > 0,
+                                                 yes = as.numeric(Sys.Date() - metadados$SERPRAZOATUALIZACAO - metadados$SERMAXDATA) -
+                                                       2*(30*ifelse(test = metadados$PERID == -1,yes = 0, no = metadados$PERID)),
+                                                 no = 0),
+                                    no = -.5)
 
   # ------ Desfazendo o erro de defasagem
-  metadados$STATUS_ATRASO <- ifelse(metadados$STATUS_ATRASO<(-.5),0,metadados$STATUS_ATRASO)
+  metadados$STATUS_ATRASO <- ifelse(test = metadados$STATUS_ATRASO < (-.5),
+                                    yes =  0,
+                                    no = metadados$STATUS_ATRASO)
 
   # ------ Inputando erro de data maior
-  metadados$STATUS_ATRASO <- ifelse(metadados$SERMAXDATA>Sys.Date(),999999999,metadados$STATUS_ATRASO)
+  metadados$STATUS_ATRASO <- ifelse(test = metadados$SERMAXDATA > Sys.Date(),
+                                    yes = 999999999,
+                                    no = metadados$STATUS_ATRASO)
 
   # RESULTADO ----------------------------------------
 
@@ -335,17 +339,17 @@ situavar <- function(serie, exportar = TRUE)
                       Data_Inicial = metadados$SERMINDATA,
                       Data_Final = metadados$SERMAXDATA,
                       Defasagem_Dias = metadados$SERPRAZOATUALIZACAO,
-                      Situacao = ifelse(metadados$STATUS_ATRASO==0,
-                                        "Variavel atualizada - OK",
-                                        ifelse(metadados$STATUS_ATRASO>0 & metadados$STATUS_ATRASO<999999999,
-                                               paste("Variavel desatualizada",metadados$STATUS_ATRASO,"dia(s)   <=="),
-                                               ifelse(metadados$STATUS_ATRASO==999999999,
-                                                      "Erro de data (!!)",
-                                                      "Serie Inativa"))),
+                      Situacao = ifelse(test = metadados$STATUS_ATRASO == 0,
+                                        yes = "Variavel atualizada - OK",
+                                        no = ifelse(test = metadados$STATUS_ATRASO > 0 & metadados$STATUS_ATRASO < 999999999,
+                                                    yes = paste("Variavel desatualizada", metadados$STATUS_ATRASO, "dia(s)   <=="),
+                                                    no = ifelse(test = metadados$STATUS_ATRASO == 999999999,
+                                                                yes = "Erro de data (!!)",
+                                                                no = "Serie Inativa"))),
                       Periodicidade = paste0(substr(x = metadados$PERID2,start = 1,stop = 1),
                                       tolower(substr(x = metadados$PERID2,start = 2,stop = 99))),
                       Responsavel = metadados$SERRESPONSAVEL,
-                      Interface = metadados$interface)
+                      Interface = metadados$INTERFACE)
 
   # ------ Exportar?
   if(exportar)
@@ -358,7 +362,7 @@ situavar <- function(serie, exportar = TRUE)
                                       substr(Sys.time(),1,4),substr(Sys.time(),6,7),
                                       substr(Sys.time(),9,10),substr(Sys.time(),12,13),
                                       substr(Sys.time(),15,16),substr(Sys.time(),18,19),
-                                      ifelse(length(serie)==1,paste0("_",serie),""),".xls")),
+                                      ifelse(length(serie) == 1,paste0("_",serie),""),".xls")),
                      sheetName="Generica", row.names=FALSE, showNA=FALSE)
   }
 
