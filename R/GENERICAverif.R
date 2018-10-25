@@ -19,26 +19,26 @@
 #' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
 #'
 #' @examples
-#' #------ Multiplas series, exibindo grafico
+#' # ------ Multiplas series, exibindo grafico
 #' gen_verif <- genericaVerif(serie = c("GM12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 #'
 #' @export
 
 genericaVerif <- function(serie)
 {
-  #------ Desligando notacao cientifica
+  # ------ Desligando notacao cientifica
   options(scipen=999)
 
-  #------ Encontrando nomes
+  # ------ Encontrando nomes
   nomes <- encontraSerie(serie = serie, plotar = FALSE)
   nomes <- nomes$SERCODIGOTROLL
 
   # CARREGANDO METADADOS ----------------------------------------
 
-  #------ Abrindo conexao
+  # ------ Abrindo conexao
   con <-  RODBC::odbcConnect("ipeadata",uid="",pwd="")
 
-  #------ Consulta SQL
+  # ------ Consulta SQL
   serie <- RODBC::sqlQuery(con,
                            paste0("SELECT ipea.vw_Valor.SERCODIGO, ",
                                   "CAST (ipea.vw_Valor.VALDATA as NUMERIC) as VALDATA, ",
@@ -47,12 +47,12 @@ genericaVerif <- function(serie)
                                   paste0("'",nomes,"'", collapse = ", "),") ",
                                   "and ipea.vw_Valor.VALVALOR IS NOT NULL order by VALDATA;"))
 
-  #------ Fechando conexao
+  # ------ Fechando conexao
   RODBC::odbcClose(con)
 
   # ORGANIZANDO ----------------------------------------
 
-  #------ Planilha Generica
+  # ------ Planilha Generica
   GENERICAv <- data.frame(VALDATA = unique(serie$VALDATA))
   for (i in 1:length(nomes))
   {
@@ -64,14 +64,14 @@ genericaVerif <- function(serie)
     names(GENERICAv)[i+1] <- nomes[i]
   }
 
-  #------ Editando formato de data
+  # ------ Editando formato de data
   GENERICAv$VALDATA <- as.Date(GENERICAv$VALDATA, origin = "1900-01-01")
 
-  #------ Removendo possivel linha de NA
+  # ------ Removendo possivel linha de NA
   GENERICAind <- data.frame(ind = is.na(GENERICAv[,-1]))
   erros <- sum(rowSums(GENERICAind)==ncol(GENERICAind))
   if(erros>0){GENERICAv <- GENERICAv[-which(rowSums(GENERICAind)==ncol(GENERICAind)),]}
 
-  #------ Resultado
+  # ------ Resultado
   return(GENERICAv)
 }

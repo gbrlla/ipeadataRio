@@ -6,7 +6,7 @@
 # --------------------------------------------------------- #
 # |   PROGRAMADOR: LUIZ EDUARDO S. GOMES                  | #
 # --------------------------------------------------------- #
-# |   CONFAZ 12 - WEBSCRAPPING                            | #
+# |   CONFAZ12 - WEBSCRAPPING                             | #
 # --------------------------------------------------------- #
 
 #' @title Registro dos usuarios IpeaData

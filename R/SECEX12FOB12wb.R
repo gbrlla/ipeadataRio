@@ -493,5 +493,4 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
   # ------ Resultado
   return(list(SECEX12EXP_Generica = GENERICA_EXP,
               SECEX12IMP_Generica = GENERICA_IMP))
-
 }

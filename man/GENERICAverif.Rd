@@ -14,7 +14,7 @@ Retorna a planilha \code{GENERICA} para verificacao a
 partir do \code{SERCODIGOTROLL}.
 }
 \examples{
-#------ Multiplas series, exibindo grafico
+# ------ Multiplas series, exibindo grafico
 gen_verif <- genericaVerif(serie = c("GM12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 
 }
