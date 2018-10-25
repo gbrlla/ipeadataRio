@@ -4,10 +4,10 @@
 \alias{genericaVerif}
 \title{Planilha GENERICA para verificacao}
 \usage{
-genericaVerif(nomes)
+genericaVerif(serie)
 }
 \arguments{
-\item{nomes}{Vetor contendo o \code{SERCODIGOTROLL} da(s) serie(s) requisitada(s).}
+\item{serie}{Vetor contendo o \code{SERCODIGOTROLL} da(s) serie(s) requisitada(s).}
 }
 \description{
 Retorna a planilha \code{GENERICA} para verificacao a
@@ -15,7 +15,7 @@ partir do \code{SERCODIGOTROLL}.
 }
 \examples{
 #------ Multiplas series, exibindo grafico
-gen_verif <- genericaVerif(nomes = c("GM12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
+gen_verif <- genericaVerif(serie = c("GM12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 
 }
 \author{

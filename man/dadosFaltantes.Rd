@@ -21,13 +21,13 @@ Retorna a descontinuidade existente nas series a partir do \code{SERCODIGOTROLL}
 Foi limitado a exibicao de ate 5 (cinco) series simultaneamente.
 }
 \examples{
-#------ Multiplas series, exibindo grafico
+# ------ Multiplas series, exibindo grafico
 desc1 <- dadosFaltantes(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 
-#------ Banco, nao exibindo grafico
+# ------ Banco, nao exibindo grafico
 desc2 <- dadosFaltantes(serie = c("TRIMESTRAL"),plotar = FALSE) # pode demandar tempo!
 
-#------ Plotando mais de 5 series, retorna erro
+# ------ Plotando mais de 5 series, retorna erro
 erro <- dadosFaltantes(serie = c("TRIMESTRAL")) # pode demandar tempo!
 
 }

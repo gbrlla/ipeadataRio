@@ -20,17 +20,17 @@ Encontra series a partir do \code{SERCODIGOTROLL},
 Foi limitado a exibicao de ate 5 (cinco) series simultaneamente.
 }
 \examples{
-#------ Serie unica, exibindo grafico
+# ------ Serie unica, exibindo grafico
 serie1 <- encontraSerie(serie = ("SGS366_CDI"))
 
-#------ Multiplas series, exibindo grafico
+# ------ Multiplas series, exibindo grafico
 serie2 <- encontraSerie(serie = c("ABATE12_ABQUBO12","ABATE12_ABQUBV12"))
 
-#------ Multiplas series, nao exibindo grafico
+# ------ Multiplas series, nao exibindo grafico
 serie3 <- encontraSerie(serie = c("gm12","ABATE12_ABPENO12","MTE12_SALMIN12"),
                          plotar = FALSE)
 
-#------ Serie nao existente (retorna erro)
+# ------ Serie nao existente (retorna erro)
 erro <- encontraSerie(serie = c("serie que n existe"))
 
 }

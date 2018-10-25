@@ -3,17 +3,17 @@
 \docType{data}
 \name{series.automaticas}
 \alias{series.automaticas}
-\title{Registro das series automaticas}
-\format{Banco de dados com 896 observacao(oes) e 3 variavel(is):
+\title{Registro dos responsaveis das series do IpeaData (Macro)}
+\format{Banco de dados com 11042 observacao(oes) e 2 variavel(is):
 \describe{
-  \item{codtroll}{Codigo das series}
-  \item{tipo}{Tipo do metodo de atualizacao}
-  \item{funcao}{Nome da funcao}
+  \item{Variavel}{Codigo}
+  \item{Responsavel}{Nome do responsavel}
 }}
 \usage{
 series.automaticas
 }
 \description{
-Registro das series obtidas de forma automatica via Gera, Webscrapping, SQL ou API.
+Conjunto de dados contendo informacoes dos responsaveis das
+series do IpeaData (Macro) para registro interno.
 }
 \keyword{datasets}

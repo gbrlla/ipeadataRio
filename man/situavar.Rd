@@ -37,13 +37,13 @@ Quando \code{serie} e unitario, o arquivo e nomeado da forma padrao com a
 adicao do conteudo de \code{serie}.
 }
 \examples{
-#------ Multiplos Bancos e serie
+# ------ Multiplos Bancos e serie
 sit1 <- situavar(serie = c("PIMPFN12","GM366","ANDIMA4","CONFAZ12_ICMSSP12"))
 
-#------ Periodicidade e bancos
+# ------ Periodicidade e bancos
 sit2 <- situavar(serie = c("diaria","IGP12"))
 
-#------ Serie nao existente (retorna erro)
+# ------ Serie nao existente (retorna erro)
 erro <- situavar(serie = c("serie que n existe"))
 
 }
