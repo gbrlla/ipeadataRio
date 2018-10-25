@@ -561,6 +561,9 @@ discordDatas <- function(serie)
                                       "FROM dbo.SERIES ",
                                       "WHERE (((dbo.SERIES.SERTIPO)='N'));"))
 
+  # ------ Convertendo para texto evitando erros
+  metadados$SERMAXDATA <- as.character(metadados$SERMAXDATA)
+
   # ------ Requerendo dados
   if(length(serie) < 300)
   {
@@ -576,6 +579,8 @@ discordDatas <- function(serie)
     }
   }
 
+  # ------ Convertendo para texto evitando erros
+  dados$VALDATA <- as.character(dados$VALDATA)
 
   # COMPARANDO ----------------------------------------
   aux <- data.frame(NULL)
@@ -584,9 +589,13 @@ discordDatas <- function(serie)
   for (i in 2:ncol(dados))
   {
     aux[i-1,1] <- names(dados)[i]
-    aux[i-1,2] <- utils::tail(x = na.exclude(dados[,c(1,i)]), n = 1)[1]
+    aux[i-1,2] <- ifelse(test = nrow(utils::tail(x = na.exclude(dados[,c(1,i)]), n = 1)[1]) > 0,
+                         yes = utils::tail(x = na.exclude(dados[,c(1,i)]), n = 1)[1],
+                         no = "")
   }
-  names(aux)[1] <- "SERCODIGOTROLL"
+
+  # ------ Nomeando
+  names(aux) <- c("SERCODIGOTROLL","VALDATA")
 
   # ------ Comparando com o do banco
   aux <- merge(x = aux, y = metadados, by = "SERCODIGOTROLL")
