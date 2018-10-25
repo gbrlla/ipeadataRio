@@ -14,23 +14,24 @@
 #' @description Retorna a planilha \code{GENERICA} para verificacao a
 #' partir do \code{SERCODIGOTROLL}.
 #'
-#' @param nomes Vetor contendo o \code{SERCODIGOTROLL} da(s) serie(s) requisitada(s).
+#' @param serie Vetor contendo o \code{SERCODIGOTROLL} da(s) serie(s) requisitada(s).
 #'
 #' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
 #'
 #' @examples
 #' #------ Multiplas series, exibindo grafico
-#' gen_verif <- genericaVerif(nomes = c("GM12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
+#' gen_verif <- genericaVerif(serie = c("GM12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 #'
 #' @export
 
-genericaVerif <- function(nomes)
+genericaVerif <- function(serie)
 {
   #------ Desligando notacao cientifica
   options(scipen=999)
 
-  #------ Removendo duplicatas, acentos e letra minuscula
-  nomes <- unique(toupper(iconv(nomes,to="ASCII//TRANSLIT")))
+  #------ Encontrando nomes
+  nomes <- encontraSerie(serie = serie, plotar = FALSE)
+  nomes <- nomes$SERCODIGOTROLL
 
   # CARREGANDO METADADOS ----------------------------------------
 

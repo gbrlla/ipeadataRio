@@ -31,75 +31,75 @@
 #' @note Foi limitado a exibicao de ate 5 (cinco) series simultaneamente.
 #'
 #' @examples
-#' #------ Serie unica, exibindo grafico
+#' # ------ Serie unica, exibindo grafico
 #' serie1 <- encontraSerie(serie = ("SGS366_CDI"))
 #'
-#' #------ Multiplas series, exibindo grafico
+#' # ------ Multiplas series, exibindo grafico
 #' serie2 <- encontraSerie(serie = c("ABATE12_ABQUBO12","ABATE12_ABQUBV12"))
 #'
-#' #------ Multiplas series, nao exibindo grafico
+#' # ------ Multiplas series, nao exibindo grafico
 #' serie3 <- encontraSerie(serie = c("gm12","ABATE12_ABPENO12","MTE12_SALMIN12"),
 #'                          plotar = FALSE)
 #'
-#' #------ Serie nao existente (retorna erro)
+#' # ------ Serie nao existente (retorna erro)
 #' erro <- encontraSerie(serie = c("serie que n existe"))
 #'
 #' @export
 
 encontraSerie <- function(serie, plotar = TRUE)
 {
-  #------ Desligando notacao cientifica
+  # ------ Desligando notacao cientifica
   options(scipen=999)
 
   # CARREGANDO METADADOS ----------------------------------------
 
-  #------ Abrindo conexao
+  # ------ Abrindo conexao
   con <-  RODBC::odbcConnect("ipeadata",uid="",pwd="")
 
-  #------ Consulta SQL
+  # ------ Consulta SQL
   metadados <- RODBC::sqlQuery(con,
                                paste0("SELECT dbo.SERIES.SERCODIGOTROLL, dbo.SERIES.PERID, ",
                                       "dbo.SERIES.SERSTATUS, dbo.SERIES.SERTIPO FROM dbo.SERIES ",
                                       "WHERE (((dbo.SERIES.SERTIPO)='N'));"))
 
-  #------ Fechando conexao
+  # ------ Fechando conexao
   RODBC::odbcClose(con)
 
   # ORGANIZANDO ARGUMENTOS ----------------------------------------
 
-  #------ Organizando texto - Removendo duplicatas, acentos e colocando em maiusculo
+  # ------ Organizando texto - Removendo duplicatas, acentos e colocando em maiusculo
   serie <- unique(toupper(iconv(serie,to="ASCII//TRANSLIT")))
 
-  #------ Alterando a estrutura para character
+  # ------ Alterando a estrutura para character
   for (j in 1:dim(metadados)[2]){metadados[,j] <- as.character(metadados[,j])}
   rm(j)
 
-  #------ Alterando label -1/1/3/6/12 para DIARIA/MENSAL/TRIMESTRAL/SEMESTRAL/ANUAL
+  # ------ Alterando label -1/1/3/6/12 para DIARIA/MENSAL/TRIMESTRAL/SEMESTRAL/ANUAL
   metadados$PERID <- factor(metadados$PERID,
                             levels = c("-1","1","3","6","12"),
                             labels = c("DIARIA","MENSAL","TRIMESTRAL","SEMESTRAL","ANUAL"))
 
-  #------ Alterando label A/I para ATIVA/INATIVA
+  # ------ Alterando label A/I para ATIVA/INATIVA
   metadados$SERSTATUS <- factor(metadados$SERSTATUS,
                                 levels = c("A","I"),
                                 labels = c("ATIVA","INATIVA"))
 
   # ENCONTRANDO AS SERIES ----------------------------------------
 
-  #------ Iniciando input
+  # ------ Iniciando input
   ii <- NULL
   for (j in 1:length(serie))
   {
-    #------ Encontrando padroes no metadados - SERCODIGOTROLL (SERIES)
+    # ------ Encontrando padroes no metadados - SERCODIGOTROLL (SERIES)
     if(length(i <- grep(paste0(serie[j]), metadados$SERCODIGOTROLL))) {ii <- c(ii,i)}
 
-    #------ Encontrando padroes no metadados - SERCODIGOTROLL (BANCOS)
+    # ------ Encontrando padroes no metadados - SERCODIGOTROLL (BANCOS)
     if(length(i <- grep(paste0(serie[j],"_"), metadados$SERCODIGOTROLL))) {ii <- c(ii,i)}
 
-    #------ Encontrando padroes no metadados - PERID
+    # ------ Encontrando padroes no metadados - PERID
     if(length(i <- grep(serie[j], metadados$PERID))) {ii <- c(ii,i)}
 
-    #------ Encontrando padroes no metadados - SERSTATUS
+    # ------ Encontrando padroes no metadados - SERSTATUS
     if(length(i <- grep(serie[j], metadados$SERSTATUS))) {ii <- c(ii,i)}
   }
 
@@ -107,10 +107,10 @@ encontraSerie <- function(serie, plotar = TRUE)
   stop("A(s) serie(s) nao existe(m) ou esta(o) com nome(s) incorreto(s)")}
   rm(i,ii,j)
 
-  #------ Ordem alfabetica
+  # ------ Ordem alfabetica
   serinput <- serinput[order(serinput$SERCODIGOTROLL),]
 
-  #------ Arrumando nome das linhas
+  # ------ Arrumando nome das linhas
   row.names(serinput) <- 1:dim(serinput)[1]
 
   # PLOTANDO GRAFICO ----------------------------------------
@@ -127,10 +127,10 @@ encontraSerie <- function(serie, plotar = TRUE)
 
   if(plotar & nrow(serinput) <= 5 & length(unique(serinput$PERID))==1)
   {
-    #------ Requisitando valores
-    generica.aux <- genericaVerif(nomes = serinput$SERCODIGOTROLL)
+    # ------ Requisitando valores
+    generica.aux <- genericaVerif(serie = serinput$SERCODIGOTROLL)
 
-    #------ Condições para o banco de dados
+    # ------ Condições para o banco de dados
     aux.data <- NA
     if(unique(serinput$PERID)=="DIARIA"){aux.data <- "day"}
     if(unique(serinput$PERID)=="MENSAL"){aux.data <- "month"}
@@ -138,20 +138,20 @@ encontraSerie <- function(serie, plotar = TRUE)
     if(unique(serinput$PERID)=="SEMESTRAL"){aux.data <- "6 months"}
     if(unique(serinput$PERID)=="ANUAL"){aux.data <- "year"}
 
-    #------ Armazenamento de data e valores
+    # ------ Armazenamento de data e valores
     datas <- data.frame(VALDATA = seq(generica.aux$VALDATA[1],
                                       generica.aux$VALDATA[nrow(generica.aux)],
                                       by = aux.data))
 
-    #------ Juntando as datas com os valores
+    # ------ Juntando as datas com os valores
     aux <- merge(datas,generica.aux,by="VALDATA",all = T)
 
-    #------ Serie Temporal auxiliar
+    # ------ Serie Temporal auxiliar
     ts.aux <- xts::xts(x = aux[,2:ncol(aux)],
                        order.by = as.Date(aux[,1], format='%Y-%m-%d'),
                        names = names(aux)[-1])
 
-    #------ Grafico dinamico
+    # ------ Grafico dinamico
     if(ncol(aux)==2)
     {
       print(dygraphs::dySeries(dygraph = dygraphs::dyRangeSelector(dygraphs::dygraph(data = ts.aux)),name = "V1",label = names(aux)[-1]))
@@ -160,7 +160,7 @@ encontraSerie <- function(serie, plotar = TRUE)
 
   # RESULTADO ----------------------------------------
 
-  #------ Resultado
+  # ------ Resultado
 
   return(serinput)
 }
@@ -172,24 +172,27 @@ encontraSerie <- function(serie, plotar = TRUE)
 #'
 #' @format Banco de dados com 11042 observacao(oes) e 2 variavel(is):
 #' \describe{
-#'   \item{Variavel}{Codigo das series}
+#'   \item{Variavel}{Codigo}
 #'   \item{Responsavel}{Nome do responsavel}
 #' }
 
-"responsavel.series"
+"series.automaticas"
 
-#' @title Registro das series automaticas
+#' @title Registro da interface de atualizacao das series
 #'
-#' @description Registro das series obtidas de forma automatica via Gera, Webscrapping, SQL ou API.
+#' @description Registro da interface de atualizacao das series: Generica ou SGS.
 #'
-#' @format Banco de dados com 896 observacao(oes) e 3 variavel(is):
+#' @format Banco de dados com 13783 observacao(oes) e 6 variavel(is):
 #' \describe{
-#'   \item{codtroll}{Codigo das series}
-#'   \item{tipo}{Tipo do metodo de atualizacao}
-#'   \item{funcao}{Nome da funcao}
+#'   \item{SERCODIGO}{Codigo}
+#'   \item{PERNOME}{Periodicidade}
+#'   \item{SERSTATUS}{Status}
+#'   \item{interface}{Interface}
+#'   \item{CodSGS}{Codigo SGS}
+#'   \item{BASNOME}{Nome da base}
 #' }
 
-"series.automaticas"
+"lista.interface"
 
 # --------------------------------------------------------- #
 # DESCRIÇÃO BREVE:
@@ -230,34 +233,34 @@ encontraSerie <- function(serie, plotar = TRUE)
 #' adicao do conteudo de \code{serie}.
 #'
 #' @examples
-#' #------ Multiplos Bancos e serie
+#' # ------ Multiplos Bancos e serie
 #' sit1 <- situavar(serie = c("PIMPFN12","GM366","ANDIMA4","CONFAZ12_ICMSSP12"))
 #'
-#' #------ Periodicidade e bancos
+#' # ------ Periodicidade e bancos
 #' sit2 <- situavar(serie = c("diaria","IGP12"))
 #'
-#' #------ Serie nao existente (retorna erro)
+#' # ------ Serie nao existente (retorna erro)
 #' erro <- situavar(serie = c("serie que n existe"))
 #'
 #' @export
 
 situavar <- function(serie, exportar = TRUE)
 {
-  #------ Organizando texto - Removendo duplicatas, acentos e colocando em maiusculo
+  # ------ Organizando texto - Removendo duplicatas, acentos e colocando em maiusculo
   serie <- unique(toupper(iconv(serie,to="ASCII//TRANSLIT")))
 
-  #------ Encontrando a serie
+  # ------ Encontrando a serie
   serinput <- encontraSerie(serie = serie,plotar = FALSE)
 
-  #------ Desligando notacao cientifica
+  # ------ Desligando notacao cientifica
   options(scipen=999)
 
   # CARREGANDO METADADOS ----------------------------------------
 
-  #------ Abrindo conexao
+  # ------ Abrindo conexao
   con <-  RODBC::odbcConnect("ipeadata",uid="",pwd="")
 
-  #------ Solicitando metadados das series
+  # ------ Solicitando metadados das series
   metadados <- data.frame(RODBC::sqlQuery(con,
                                           (paste0("SELECT dbo.SERIES.SERCODIGOTROLL, ",
                                                   "CAST (dbo.SERIES.SERMINDATA as NUMERIC) as SERMINDATA, ",
@@ -270,12 +273,12 @@ situavar <- function(serie, exportar = TRUE)
                           PERID2 = serinput$PERID,
                           STATUS_ATRASO = NA)
 
-  #------ Fechando conexao
+  # ------ Fechando conexao
   RODBC::odbcClose(con)
 
   # ORGANIZANDO ARGUMENTOS ----------------------------------------
 
-  #------ Tornando datas padroes
+  # ------ Tornando datas padroes
   metadados$SERMINDATA <- as.Date(metadados$SERMINDATA, origin = "1900-01-01")
   metadados$SERMAXDATA <- as.Date(metadados$SERMAXDATA, origin = "1900-01-01")
 
@@ -302,7 +305,7 @@ situavar <- function(serie, exportar = TRUE)
   # - Senao, OK.
   # --------------------------------------------------------- #
 
-  #------ Calculando
+  # ------ Calculando
   metadados$STATUS_ATRASO <- ifelse(metadados$SERSTATUS=="A",
                                     ifelse(as.numeric(data.ref-metadados$SERPRAZOATUALIZACAO-metadados$SERMAXDATA)>0,
                                            as.numeric(Sys.Date()-metadados$SERPRAZOATUALIZACAO-metadados$SERMAXDATA)-
@@ -310,18 +313,24 @@ situavar <- function(serie, exportar = TRUE)
                                            0),
                                     -.5)
 
-  #------ Desfazendo o erro de defasagem
+  # ------ Desfazendo o erro de defasagem
   metadados$STATUS_ATRASO <- ifelse(metadados$STATUS_ATRASO<(-.5),0,metadados$STATUS_ATRASO)
 
-  #------ Inputando erro de data maior
+  # ------ Inputando erro de data maior
   metadados$STATUS_ATRASO <- ifelse(metadados$SERMAXDATA>Sys.Date(),999999999,metadados$STATUS_ATRASO)
 
   # RESULTADO ----------------------------------------
 
-  #------ Ordenando por n de atrasos
+  # ------ Adicionando interface
+  metadados <- merge(x = metadados,
+                     y = data.frame(SERCODIGOTROLL = ipeadataRio::lista.interface$SERCODIGO,
+                                    INTERFACE = ipeadataRio::lista.interface$interface),
+                     by = "SERCODIGOTROLL")
+
+  # ------ Ordenando por n de atrasos
   metadados <- metadados[order(metadados$STATUS_ATRASO,decreasing = T),]
 
-  #------ Banco resultado
+  # ------ Banco resultado
   saida <- data.frame(Variavel = metadados$SERCODIGOTROLL,
                       Data_Inicial = metadados$SERMINDATA,
                       Data_Final = metadados$SERMAXDATA,
@@ -335,16 +344,13 @@ situavar <- function(serie, exportar = TRUE)
                                                       "Serie Inativa"))),
                       Periodicidade = paste0(substr(x = metadados$PERID2,start = 1,stop = 1),
                                       tolower(substr(x = metadados$PERID2,start = 2,stop = 99))),
-                      Responsavel = metadados$SERRESPONSAVEL)
+                      Responsavel = metadados$SERRESPONSAVEL,
+                      Interface = metadados$interface)
 
-  #------ Substituindo responsaveis
-  serres <- ipeadataRio::responsavel.series
-  saida <- merge(x = saida[,-7],y = serres,by = "Variavel",all.x = TRUE,sort = FALSE)
-
-  #------ Exportar?
+  # ------ Exportar?
   if(exportar)
   {
-    #------ Salvando relatorio
+    # ------ Salvando relatorio
     xlsx::write.xlsx(x = saida,
                      file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral",
                                       "PacoteIpeadataRio","situavar",
@@ -377,7 +383,7 @@ situavar <- function(serie, exportar = TRUE)
   cat(paste("Metadados nao preenchidos  ............",sum(is.na(metadados$STATUS_ATRASO))),"\n")
   cat("\n")
 
-  #------ Resultado
+  # ------ Resultado
   return(saida)
 }
 
@@ -404,45 +410,45 @@ situavar <- function(serie, exportar = TRUE)
 #' @note Foi limitado a exibicao de ate 5 (cinco) series simultaneamente.
 #'
 #' @examples
-#' #------ Multiplas series, exibindo grafico
+#' # ------ Multiplas series, exibindo grafico
 #' desc1 <- dadosFaltantes(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 #'
-#' #------ Banco, nao exibindo grafico
+#' # ------ Banco, nao exibindo grafico
 #' desc2 <- dadosFaltantes(serie = c("TRIMESTRAL"),plotar = FALSE) # pode demandar tempo!
 #'
-#' #------ Plotando mais de 5 series, retorna erro
+#' # ------ Plotando mais de 5 series, retorna erro
 #' erro <- dadosFaltantes(serie = c("TRIMESTRAL")) # pode demandar tempo!
 #'
 #' @export
 
 dadosFaltantes <- function(serie, plotar = TRUE)
 {
-  #------ Organizando texto - Removendo duplicatas, acentos e colocando em maiusculo
+  # ------ Organizando texto - Removendo duplicatas, acentos e colocando em maiusculo
   serie <- unique(toupper(iconv(serie,to="ASCII//TRANSLIT")))
 
-  #------ Encontrando a serie
+  # ------ Encontrando a serie
   serinput <- encontraSerie(serie = serie,plotar = plotar)
 
-  #------ Retornando erro se possui series diarias
+  # ------ Retornando erro se possui series diarias
   if(sum(serinput$PERID=="DIARIA")>0) stop("Series com periodicidade DIARIA nao sao aplicaveis")
 
-  #------ Desligando notacao cientifica
+  # ------ Desligando notacao cientifica
   options(scipen=999)
 
-  #------ Banco auxiliar
+  # ------ Banco auxiliar
   saida <- data.frame(serinput$SERCODIGOTROLL, serinput$SERSTATUS, N_MISS = NA)
 
-  #------ Atualizacao da barra de progresso
+  # ------ Atualizacao da barra de progresso
   update.step <- ifelse(nrow(saida)>5,max(5, floor(nrow(saida)/100)),0)
 
-  #------ Barra de progresso
+  # ------ Barra de progresso
   if(update.step>0){pb <- txtProgressBar(max = nrow(saida), style = 3)}
 
   # CARREGANDO VALORES ----------------------------------------
 
   for (i in 1:dim(serinput)[1])
   {
-    #------ Abrindo conexao
+    # ------ Abrindo conexao
     con <-  RODBC::odbcConnect("ipeadata",uid="",pwd="")
 
     valores <- RODBC::sqlQuery(con,
@@ -451,45 +457,45 @@ dadosFaltantes <- function(serie, plotar = TRUE)
                                        "ipea.vw_Valor.VALVALOR FROM ipea.vw_Valor WHERE (((ipea.vw_Valor.SERCODIGO)='",
                                        serinput$SERCODIGOTROLL[i],"')) order by VALDATA;")))
 
-    #------ Fechando conexao
+    # ------ Fechando conexao
     RODBC::odbcClose(con)
 
     if (nrow(valores)>0)
     {
-      #------ Tornando datas padrões
+      # ------ Tornando datas padrões
       valores$VALDATA <- as.Date(valores$VALDATA, origin = "1900-01-01")
 
-      #------ Condições para o banco de dados
+      # ------ Condições para o banco de dados
       if(serinput$PERID[i]=="MENSAL") aux.data <- "month"
       if(serinput$PERID[i]=="TRIMESTRAL") aux.data <- "3 months"
       if(serinput$PERID[i]=="SEMESTRAL") aux.data <- "6 months"
       if(serinput$PERID[i]=="ANUAL") aux.data <- "year"
 
-      #------ Armazenamento de data e valores
+      # ------ Armazenamento de data e valores
       datas <- data.frame(VALDATA = seq(valores$VALDATA[1],
                                         valores$VALDATA[nrow(valores)],
                                         by = aux.data))
 
-      #------ Juntando as datas com os valores
+      # ------ Juntando as datas com os valores
       valores <- merge(valores,datas,by="VALDATA",all = T)
 
-      #------ Contagem dados faltantes
+      # ------ Contagem dados faltantes
       saida$N_MISS[i] <- sum(is.na(valores$VALVALOR))
     } else {saida$N_MISS[i] <- 999999999}
 
-    #------ Barra de progresso na tela
+    # ------ Barra de progresso na tela
     if(update.step!=0 & (i%%update.step)==0){setTxtProgressBar(pb, i)}
   }
 
-  #------ Fechando conexao da barra de progresso
+  # ------ Fechando conexao da barra de progresso
   if(update.step!=0){close(pb)}
 
   # RESULTADO ----------------------------------------
 
-  #------ Serie em ordem alfabetica com respectivo numero de faltantes (missing)
+  # ------ Serie em ordem alfabetica com respectivo numero de faltantes (missing)
   saida <- saida[order(saida$N_MISS,decreasing = T),]
 
-  #------ Banco resultado
+  # ------ Banco resultado
   saida2 <- data.frame(Variavel = saida$serinput.SERCODIGOTROLL,
                        Status = saida$serinput.SERSTATUS,
                        Dados_Faltantes = ifelse(saida$N_MISS==0,
@@ -517,6 +523,82 @@ dadosFaltantes <- function(serie, plotar = TRUE)
   cat(paste("Vazias ................................",sum(saida$N_MISS==999999999,na.rm = T)),"\n")
   cat("\n")
 
-  #------ Resultado
+  # ------ Resultado
   return(saida2)
+}
+
+# --------------------------------------------------------- #
+# DESCRIÇÃO BREVE:
+# - Esta rotina retorna series com discordancia nas datas.
+# - A busca pode ser feita pelo codigo, periodicidade ou status.
+# - Quando nenhuma serie e encotrada, retorna aviso.
+# --------------------------------------------------------- #
+
+#' @title Discordancia de datas
+#'
+#' @description Retorna a discordancia de datas nas series a partir do \code{SERCODIGOTROLL},
+#' \emph{banco}, \emph{periodicidade} e/ou \emph{status}.
+#'
+#' @param serie Vetor contendo o \code{SERCODIGOTROLL},\emph{banco}, \emph{periodicidade}
+#'  e/ou \emph{status} da(s) serie(s) requisitada(s).
+#'
+#' @author Luiz Eduardo Gomes, \email{luiz.gomes@@ipea.gov.br} ou \email{gomes.leduardo@@gmail.com}.
+#'
+#' @examples
+#' # ------ Multiplas series
+#' disc <- discordDatas(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
+#'
+#' @export
+
+discordDatas <- function(serie)
+{
+  # ------ Abrindo conexao
+  con <-  RODBC::odbcConnect("ipeadata",uid="",pwd="")
+
+  # ------ Consulta SQL
+  metadados <- RODBC::sqlQuery(con,
+                               paste0("SELECT dbo.SERIES.SERCODIGOTROLL, dbo.SERIES.SERMAXDATA ",
+                                      "FROM dbo.SERIES ",
+                                      "WHERE (((dbo.SERIES.SERTIPO)='N'));"))
+
+  # ------ Requerendo dados
+  if(length(serie) < 300)
+  {
+    dados <- genericaVerif(serie = serie)
+  } else {
+    sec <- c(seq(0, length(serie), 100), length(serie))
+    dados <- genericaVerif(serie = serie[(sec[1] + 1):sec[2]])
+    for (l in 2:(length(sec) - 1))
+    {
+      dados <- merge(x = dados,
+                     y = genericaVerif(serie = serie[(sec[l] + 1):sec[l + 1]]),
+                     by = "VALDATA")
+    }
+  }
+
+
+  # COMPARANDO ----------------------------------------
+  aux <- data.frame(NULL)
+
+  # ------ Buscando datas finais
+  for (i in 2:ncol(dados))
+  {
+    aux[i-1,1] <- names(dados)[i]
+    aux[i-1,2] <- utils::tail(x = na.exclude(dados[,c(1,i)]), n = 1)[1]
+  }
+  names(aux)[1] <- "SERCODIGOTROLL"
+
+  # ------ Comparando com o do banco
+  aux <- merge(x = aux, y = metadados, by = "SERCODIGOTROLL")
+  aux[,4] <- ifelse(test = aux$VALDATA == as.Date(aux$SERMAXDATA), yes = 1, no = 0)
+
+  # RESULTADO ----------------------------------------
+
+  # ------ Banco resultado
+  saida <- subset(x = aux,subset = aux[,4] == 0)
+
+  # ------ Resultado
+  if(nrow(saida) == 0){cat("Nao ha discordancia entre datas!")} else {
+    return(saida[,-4])
+  }
 }

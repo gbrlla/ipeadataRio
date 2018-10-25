@@ -3,6 +3,7 @@
 export(CONFAZ12wb)
 export(SECEX12FOB12wb)
 export(dadosFaltantes)
+export(discordDatas)
 export(encontraSerie)
 export(genericaVerif)
 export(situavar)

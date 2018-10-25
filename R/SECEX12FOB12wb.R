@@ -398,8 +398,8 @@ SECEX12FOB12wb <- function(gerarGen = TRUE, completa = FALSE)
   rm(ZE_aux)
 
   # ------ Comparando valores
-  VALORES.BASE_EXP <- genericaVerif(nomes = names(GENERICA_EXP)[-1])
-  VALORES.BASE_IMP <- genericaVerif(nomes = names(GENERICA_IMP)[-1])
+  VALORES.BASE_EXP <- genericaVerif(serie = names(GENERICA_EXP)[-1])
+  VALORES.BASE_IMP <- genericaVerif(serie = names(GENERICA_IMP)[-1])
 
   # ------ Organizando data
   VALORES.BASE_EXP$VALDATA <- VALORES.BASE_EXP$VALDATA + 14

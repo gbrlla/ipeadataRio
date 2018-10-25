@@ -519,7 +519,7 @@ CONFAZ12wb <- function(gerarGen = TRUE)
   }
 
   #------ Comparando valores
-  VALORES.BASE <- genericaVerif(nomes = names(GENERICA)[-1])
+  VALORES.BASE <- genericaVerif(serie = names(GENERICA)[-1])
 
   #------ Organizando data
   VALORES.BASE$VALDATA <- VALORES.BASE$VALDATA + 14
