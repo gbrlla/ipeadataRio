@@ -553,6 +553,8 @@ dadosFaltantes <- function(serie, plotar = TRUE)
 #' disc <- discordDatas(serie = c("gm12_DOW12","ABATE12_ABPENO12","MTE12_SALMIN12"))
 #'
 #' @export
+#'
+#' @importFrom utils tail
 
 discordDatas <- function(serie)
 {
