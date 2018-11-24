@@ -21,6 +21,6 @@ Para informações mais detalhadas juntamente com exemplos de uso, consulte o ma
 
 ## Requisitos
 
-É necessário estar com o *Open Database Connectivity* (ODBC) configurado para permissão de acesso ao banco de dados IpeaData. 
+É necessário estar com o *Open Database Connectivity* (ODBC) configurado para permissão de acesso ao banco de dados Ipeadata. 
 
 **SOMENTE PARA USO INTERNO**
