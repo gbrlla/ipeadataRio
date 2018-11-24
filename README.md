@@ -1,6 +1,6 @@
 # ipeadataRio
 
-*Este pacote será utilizado unicamente pelo grupo de atualização do IpeaData.*
+*Este pacote será utilizado unicamente pelo grupo de atualização do Ipeadata.*
 
 [Acesse aqui o portal do Ipeadata](http://www.ipeadata.gov.br)
 
