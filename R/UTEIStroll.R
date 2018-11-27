@@ -104,7 +104,7 @@ encontraSerie <- function(serie, plotar = TRUE)
   }
 
   if(length(ii)>0){serinput <- metadados[unique(ii),]} else {
-  stop("A(s) serie(s) nao existe(m) ou esta(o) com nome(s) incorreto(s)")}
+    stop("A(s) serie(s) nao existe(m) ou esta(o) com nome(s) incorreto(s)")}
   rm(i,ii,j)
 
   # ------ Ordem alfabetica
@@ -309,7 +309,7 @@ situavar <- function(serie, exportar = TRUE)
   metadados$STATUS_ATRASO <- ifelse(test = metadados$SERSTATUS == "A",
                                     yes = ifelse(test = as.numeric(data.ref - metadados$SERPRAZOATUALIZACAO - metadados$SERMAXDATA) > 0,
                                                  yes = as.numeric(Sys.Date() - metadados$SERPRAZOATUALIZACAO - metadados$SERMAXDATA) -
-                                                       2*(30*ifelse(test = metadados$PERID == -1,yes = 0, no = metadados$PERID)),
+                                                   2*(30*ifelse(test = metadados$PERID == -1,yes = 0, no = metadados$PERID)),
                                                  no = 0),
                                     no = -.5)
 
@@ -347,7 +347,7 @@ situavar <- function(serie, exportar = TRUE)
                                                                 yes = "Erro de data (!!)",
                                                                 no = "Serie Inativa"))),
                       Periodicidade = paste0(substr(x = metadados$PERID2,start = 1,stop = 1),
-                                      tolower(substr(x = metadados$PERID2,start = 2,stop = 99))),
+                                             tolower(substr(x = metadados$PERID2,start = 2,stop = 99))),
                       Responsavel = metadados$SERRESPONSAVEL,
                       Interface = metadados$INTERFACE)
 
@@ -359,10 +359,10 @@ situavar <- function(serie, exportar = TRUE)
                      file = file.path("","","Srjn3","area_corporativa","Projeto_IPEADATA","Geral",
                                       "PacoteIpeadataRio","situavar",
                                       paste0("situavar",
-                                      substr(Sys.time(),1,4),substr(Sys.time(),6,7),
-                                      substr(Sys.time(),9,10),substr(Sys.time(),12,13),
-                                      substr(Sys.time(),15,16),substr(Sys.time(),18,19),
-                                      ifelse(length(serie) == 1,paste0("_",serie),""),".xls")),
+                                             substr(Sys.time(),1,4),substr(Sys.time(),6,7),
+                                             substr(Sys.time(),9,10),substr(Sys.time(),12,13),
+                                             substr(Sys.time(),15,16),substr(Sys.time(),18,19),
+                                             ifelse(length(serie) == 1,paste0("_",serie),""),".xls")),
                      sheetName="Generica", row.names=FALSE, showNA=FALSE)
   }
 
@@ -442,6 +442,9 @@ dadosFaltantes <- function(serie, plotar = TRUE)
   # ------ Banco auxiliar
   saida <- data.frame(serinput$SERCODIGOTROLL, serinput$SERSTATUS, N_MISS = NA)
 
+  # ------ Banco auxiliar 2
+  saida.aux <- data.frame(NULL)
+
   # ------ Atualizacao da barra de progresso
   update.step <- ifelse(nrow(saida)>5,max(5, floor(nrow(saida)/100)),0)
 
@@ -464,7 +467,7 @@ dadosFaltantes <- function(serie, plotar = TRUE)
     # ------ Fechando conexao
     RODBC::odbcClose(con)
 
-    if (nrow(valores)>0)
+    if (nrow(valores) > 0)
     {
       # ------ Tornando datas padrões
       valores$VALDATA <- as.Date(valores$VALDATA, origin = "1900-01-01")
@@ -481,10 +484,16 @@ dadosFaltantes <- function(serie, plotar = TRUE)
                                         by = aux.data))
 
       # ------ Juntando as datas com os valores
-      valores <- merge(valores,datas,by="VALDATA",all = T)
+      valores <- merge(x = valores, y = datas, by = "VALDATA",all = T)
+
+      # ------ Removendo possivel NA do codigo
+      valores$SERCODIGO <- valores$SERCODIGO[1]
 
       # ------ Contagem dados faltantes
       saida$N_MISS[i] <- sum(is.na(valores$VALVALOR))
+
+      # ------ Valores faltantes
+      saida.aux <- rbind(saida.aux, valores[which(is.na(valores$VALVALOR)),-3])
     } else {saida$N_MISS[i] <- 999999999}
 
     # ------ Barra de progresso na tela
@@ -502,11 +511,14 @@ dadosFaltantes <- function(serie, plotar = TRUE)
   # ------ Banco resultado
   saida2 <- data.frame(Variavel = saida$serinput.SERCODIGOTROLL,
                        Status = saida$serinput.SERSTATUS,
-                       Dados_Faltantes = ifelse(saida$N_MISS==0,
+                       Dados_Faltantes = ifelse(saida$N_MISS == 0,
                                                 "Variavel completa - OK",
-                                                ifelse(saida$N_MISS>0 & saida$N_MISS<999999999,
+                                                ifelse(saida$N_MISS > 0 & saida$N_MISS < 999999999,
                                                        paste("Variavel com",saida$N_MISS,"dado(s) faltante(s)   <=="),
                                                        "Variavel vazia   (!!)")))
+
+  # ------ Arrumando o numero das linhas
+  if(nrow(saida.aux) > 0){row.names(saida.aux) <- 1:nrow(saida.aux)}
 
   # TEXTO RESUMO ----------------------------------------
 
@@ -528,7 +540,11 @@ dadosFaltantes <- function(serie, plotar = TRUE)
   cat("\n")
 
   # ------ Resultado
-  return(saida2)
+  if(nrow(saida.aux) > 0)
+  {
+    SAIDA.3 <- list(resumo = saida2, datas.faltantes = saida.aux)
+    return(SAIDA.3)
+  } else {return(saida2)}
 }
 
 # --------------------------------------------------------- #
@@ -540,7 +556,8 @@ dadosFaltantes <- function(serie, plotar = TRUE)
 
 #' @title Discordancia de datas
 #'
-#' @description Retorna a discordancia de datas nas series a partir do \code{SERCODIGOTROLL},
+#' @description Retorna a discordancia de datas nas series, i.e., verifica se a data maxima
+#' e a data final da serie coincidem, a partir do \code{SERCODIGOTROLL},
 #' \emph{banco}, \emph{periodicidade} e/ou \emph{status}.
 #'
 #' @param serie Vetor contendo o \code{SERCODIGOTROLL},\emph{banco}, \emph{periodicidade}
