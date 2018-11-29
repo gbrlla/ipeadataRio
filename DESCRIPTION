@@ -1,6 +1,6 @@
 Package: ipeadataRio
 Title: Atualizacao e verificacao do IpeaData
-Version: 0.1.2
+Version: 0.1.3
 Author: Luiz Eduardo Gomes, <luiz.gomes@ipea.gov.br>, <gomes.leduardo@gmail.com>
 Maintainer: Luiz Eduardo Gomes, <luiz.gomes@ipea.gov.br>, <gomes.leduardo@gmail.com>
 Description: Auxilia a equipe Rio na atualizacao e verificao das series no IpeaData. 
