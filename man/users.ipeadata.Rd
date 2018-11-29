@@ -14,6 +14,7 @@
 users.ipeadata
 }
 \description{
-Conjunto de dados contendo informacoes dos membros da equipe para registro interno.
+Conjunto de dados contendo informacoes dos
+membros da equipe para registro interno.
 }
 \keyword{datasets}

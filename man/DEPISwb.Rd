@@ -11,8 +11,8 @@ DEPISwb(gerarGen = TRUE)
 atualizada no diretorio especifico do \emph{ETL}. O \emph{default} e \code{TRUE}.}
 }
 \description{
-Realiza a raspagem de dados referentes a algumas series do banco DEPIS a partir da
-API do SIDRA (\url{https://sidra.ibge.gov.br}).
+Realiza a raspagem de dados referentes a algumas series
+do banco DEPIS a partir da API do SIDRA (\url{https://sidra.ibge.gov.br}).
 }
 \examples{
 #------ Exportando a planilha GENERICA no diretorio.
@@ -20,5 +20,6 @@ depis <- DEPISwb()
 
 }
 \author{
-Luiz Eduardo Gomes, \email{luiz.gomes@ipea.gov.br} ou \email{gomes.leduardo@gmail.com}.
+Luiz Eduardo Gomes, \email{luiz.gomes@ipea.gov.br}
+ou \email{gomes.leduardo@gmail.com}.
 }

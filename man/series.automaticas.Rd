@@ -4,16 +4,18 @@
 \name{series.automaticas}
 \alias{series.automaticas}
 \title{Registro dos responsaveis das series do IpeaData (Macro)}
-\format{Banco de dados com 11042 observacao(oes) e 2 variavel(is):
+\format{Banco de dados com 900 observacao(oes) e 3 variavel(is):
 \describe{
-  \item{Variavel}{Codigo}
-  \item{Responsavel}{Nome do responsavel}
+  \item{codtroll}{Codigo}
+  \item{tipo}{Tipo de automatizacao}
+  \item{funcao}{Funcao que realiza a automacao}
 }}
 \usage{
 series.automaticas
 }
 \description{
-Conjunto de dados contendo informacoes dos responsaveis das
-series do IpeaData (Macro) para registro interno.
+Conjunto de dados contendo informacoes a respeito das
+series que estao automatizadas (via R) dentre alguns dos procedimentos
+padrao (API, Gera, SQL ou webscrapping)
 }
 \keyword{datasets}

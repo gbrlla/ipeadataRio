@@ -17,6 +17,7 @@
 codpaises.SECEX12FOB12
 }
 \description{
-Conjunto de dados contendo os codigos dos paises utilizado pela SECEX/MDIC.
+Conjunto de dados contendo os codigos dos
+paises utilizado pela SECEX/MDIC.
 }
 \keyword{datasets}

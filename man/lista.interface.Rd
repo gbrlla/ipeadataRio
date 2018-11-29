@@ -17,6 +17,7 @@
 lista.interface
 }
 \description{
-Registro da interface de atualizacao das series: Generica ou SGS.
+Registro da interface de atualizacao das series:
+Generica ou SGS.
 }
 \keyword{datasets}

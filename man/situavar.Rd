@@ -7,15 +7,17 @@
 situavar(serie, exportar = TRUE)
 }
 \arguments{
-\item{serie}{Vetor contendo o \code{SERCODIGOTROLL},\emph{banco}, \emph{periodicidade}
-e/ou \emph{status} da(s) serie(s) requisitada(s).}
+\item{serie}{Vetor contendo o \code{SERCODIGOTROLL},\emph{banco},
+\emph{periodicidade} e/ou \emph{status} da(s) serie(s) requisitada(s).}
 
-\item{exportar}{Logico. Se \code{exportar = TRUE}, um relatorio \code{.xls} e exportado para o
-diretorio do \code{situavar}. O \emph{default} e \code{TRUE}.}
+\item{exportar}{Logico. Se \code{exportar = TRUE}, um relatorio
+\code{.xls} e exportado para o diretorio do \code{situavar}.
+O \emph{default} e \code{TRUE}.}
 }
 \description{
-Retorna a situacao das series com relacao a atraso a partir do \code{SERCODIGOTROLL},
-\emph{banco}, \emph{periodicidade} e/ou \emph{status}.
+Retorna a situacao das series com relacao a atraso a
+partir do \code{SERCODIGOTROLL}, \emph{banco}, \emph{periodicidade}
+e/ou \emph{status}.
 }
 \details{
 Para series \emph{DIARIAS}, a data de referencia sera dada pelo dia corrente.
@@ -23,13 +25,16 @@ Para series \emph{DIARIAS}, a data de referencia sera dada pelo dia corrente.
 Para series \emph{MENSAIS}, \emph{TRIMESTRAIS} E \emph{SEMESTRAIS},
 a data de referencia sera dada por AAAA-MM-01.
 
-Para series \emph{ANUAIS} em diante, a data de referencia sera dada por AAAA-01-01.
+Para series \emph{ANUAIS} em diante, a data de referencia
+sera dada por AAAA-01-01.
 
-Assim, o \emph{default} para series \emph{DIARIAS} e estarem atualizadas no mesmo dia e
-para as restantes, e estarem atualizadas na unidade de tempo anterior.
+Assim, o \emph{default} para series \emph{DIARIAS} e
+estarem atualizadas no mesmo dia e para as restantes,
+e estarem atualizadas na unidade de tempo anterior.
 
 Calculo:
-Se \bold{(Data de referencia - Defasagem - Data final > 0)} entao a serie esta atrasada.
+Se \bold{(Data de referencia - Defasagem - Data final > 0)}
+entao a serie esta atrasada.
 }
 \note{
 A nomenclatura dada ao arquivo sera \emph{situavarAAAAMMDDhhmmss.xls}.
@@ -38,15 +43,17 @@ adicao do conteudo de \code{serie}.
 }
 \examples{
 # ------ Multiplos Bancos e serie
-sit1 <- situavar(serie = c("PIMPFN12","GM366","ANDIMA4","CONFAZ12_ICMSSP12"))
+sit1 <- situavar(serie = c("PIMPFN12", "GM366", "ANDIMA4",
+ "CONFAZ12_ICMSSP12"))
 
 # ------ Periodicidade e bancos
-sit2 <- situavar(serie = c("diaria","IGP12"))
+sit2 <- situavar(serie = c("diaria", "IGP12"))
 
 # ------ Serie nao existente (retorna erro)
 erro <- situavar(serie = c("serie que n existe"))
 
 }
 \author{
-Luiz Eduardo Gomes, \email{luiz.gomes@ipea.gov.br} ou \email{gomes.leduardo@gmail.com}.
+Luiz Eduardo Gomes, \email{luiz.gomes@ipea.gov.br} ou
+\email{gomes.leduardo@gmail.com}.
 }

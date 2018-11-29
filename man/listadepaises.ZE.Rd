@@ -35,6 +35,7 @@
 listadepaises.ZE
 }
 \description{
-Conjunto de dados contendo os codigos dos paises da Zona do Euro utilizado pela SECEX/MDIC.
+Conjunto de dados contendo os codigos dos paises da
+Zona do Euro utilizado pela SECEX/MDIC.
 }
 \keyword{datasets}

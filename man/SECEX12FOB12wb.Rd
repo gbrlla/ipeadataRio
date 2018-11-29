@@ -11,25 +11,28 @@ SECEX12FOB12wb(gerarGen = TRUE, completa = FALSE)
 atualizada no diretorio especifico do \emph{ETL}. O \emph{default} e \code{TRUE}.}
 
 \item{completa}{Logico. Se \code{completa = FALSE}, e requisitado apenas os ultimos
-10 anos da serie temporal. Se \code{completa = TRUE}, a serie temporal completa e requisitada,
-demandando tempo. O \emph{default} e \code{FALSE}.}
+10 anos da serie temporal. Se \code{completa = TRUE},
+a serie temporal completa e requisitada, demandando tempo.
+O \emph{default} e \code{FALSE}.}
 }
 \description{
 Realiza a ordenacao e organizacao dos dados referentes ao
-banco SECEX12 (FOB12) a partir do banco SQL interno e exporta a planilha \code{GENERICA}
-no diretorio especifico do ETL.
+banco SECEX12 (FOB12) a partir do banco SQL interno e exporta
+a planilha \code{GENERICA} no diretorio especifico do ETL.
 }
 \note{
 Quando nao ha informacao disponivel, o valor 0 (zero) e atribuido.
 }
 \examples{
-#------ Exportando a planilha GENERICA no diretorio.
+# ------ Exportando a planilha GENERICA no diretorio.
 fob1 <- SECEX12FOB12wb()
 
-#------ Nao exportando. (Indicado para quem nao possui acesso a pasta do ETL)
+# ------ Nao exportando
+# Indicado para quem nao possui acesso a pasta do ETL!
 fob2 <- SECEX12FOB12wb(gerarGen = FALSE)
 
 }
 \author{
-Luiz Eduardo Gomes, \email{luiz.gomes@ipea.gov.br} ou \email{gomes.leduardo@gmail.com}.
+Luiz Eduardo Gomes, \email{luiz.gomes@ipea.gov.br}
+ou \email{gomes.leduardo@gmail.com}.
 }

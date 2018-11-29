@@ -14,6 +14,7 @@
 codterrit.CONFAZ12
 }
 \description{
-Conjunto de dados contendo os codigos dos territorios utilizado pela CONFAZ.
+Conjunto de dados contendo os codigos dos
+territorios utilizado pela CONFAZ.
 }
 \keyword{datasets}

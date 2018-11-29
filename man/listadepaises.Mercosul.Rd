@@ -22,6 +22,7 @@
 listadepaises.Mercosul
 }
 \description{
-Conjunto de dados contendo os codigos dos paises do MERCOSUL utilizado pela SECEX/MDIC.
+Conjunto de dados contendo os codigos dos paises
+do MERCOSUL utilizado pela SECEX/MDIC.
 }
 \keyword{datasets}
