@@ -64,11 +64,11 @@
 #' 2nd ed. Springer Verlag, New York.
 #'
 #' @examples
-#' #------ Exportando a planilha GENERICA no diretorio.
+#' # ----- Exportando a planilha GENERICA no diretorio.
 #' confaz1 <- CONFAZ12wb()
 #'
-#' #------ Nao exportando. (Indicado para quem
-#' nao possui acesso a pasta do ETL)
+#' # ----- Nao exportando
+#' # Indicado para quem nao possui acesso a pasta do ETL!
 #' confaz2 <- CONFAZ12wb(gerarGen = FALSE)
 #'
 #' @export

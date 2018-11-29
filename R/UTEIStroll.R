@@ -211,7 +211,7 @@ EncontraSerie <- function(serie, plotar = TRUE) {
 #'   \item{Responsavel}{Nome do responsavel}
 #' }
 
-"serresponsavel"
+"responsavel.series"
 
 #' @title Registro dos responsaveis das series do IpeaData (Macro)
 #'

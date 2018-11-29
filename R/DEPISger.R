@@ -102,7 +102,7 @@ DEPISwb <- function(gerarGen = TRUE) {
   GENERICA$VALDATA <- GENERICA$VALDATA + 14
 
   # ------ Comparando valores
-  gen <- ipeadataRio::genericaVerif(serinput)
+  gen <- ipeadataRio::generica(serinput)
   r <- 1
   for (i in 1:length(serinput)) {
     r <- c(r, which(names(gen) == serinput[i]))

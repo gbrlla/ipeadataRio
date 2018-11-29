@@ -99,10 +99,11 @@
 #' @note Quando nao ha informacao disponivel, o valor 0 (zero) e atribuido.
 #'
 #' @examples
-#' #------ Exportando a planilha GENERICA no diretorio.
+#' # ------ Exportando a planilha GENERICA no diretorio.
 #' fob1 <- SECEX12FOB12wb()
 #'
-#' #------ Nao exportando. (Indicado para quem nao possui acesso a pasta do ETL)
+#' # ------ Nao exportando
+#' # Indicado para quem nao possui acesso a pasta do ETL!
 #' fob2 <- SECEX12FOB12wb(gerarGen = FALSE)
 #'
 #' @export
