@@ -211,6 +211,21 @@ EncontraSerie <- function(serie, plotar = TRUE) {
 #'   \item{Responsavel}{Nome do responsavel}
 #' }
 
+"serresponsavel"
+
+#' @title Registro dos responsaveis das series do IpeaData (Macro)
+#'
+#' @description Conjunto de dados contendo informacoes a respeito das
+#' series que estao automatizadas (via R) dentre alguns dos procedimentos
+#' padrao (API, Gera, SQL ou webscrapping)
+#'
+#' @format Banco de dados com 900 observacao(oes) e 3 variavel(is):
+#' \describe{
+#'   \item{codtroll}{Codigo}
+#'   \item{tipo}{Tipo de automatizacao}
+#'   \item{funcao}{Funcao que realiza a automacao}
+#' }
+
 "series.automaticas"
 
 #' @title Registro da interface de atualizacao das series
