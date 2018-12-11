@@ -10,6 +10,7 @@
 # --------------------------------------------------------- #
 
 # MLD -------------------------------------------------------
+#
 
 # -------------------------------------------------------------- #
 # REFERENCIA:
@@ -17,11 +18,14 @@
 # Bayesian forecasting and dynamic models (WEST & HARRISON, 1997)
 # -------------------------------------------------------------- #
 
+Y <- generica('IPPC12')
+Y <- Y[,2]
+
 MLD <- function(Y, period, plotar = FALSE, IC = .95,
                 namostra = 10000, dataY = NULL,
                 Fnivel = TRUE, Ftend = TRUE, Fsaz = TRUE,
-                priori = TRUE, logY = FALSE)
-{
+                priori = TRUE, logY = FALSE) {
+
   # ------ Avisos de erro
   if (!is.vector(Y)) {
     warning("A serie deve ser um vetor numerico")
@@ -267,18 +271,6 @@ MLD <- function(Y, period, plotar = FALSE, IC = .95,
   ftk.LI <- matrixStats::colQuantiles(x = compIC2,probs = (1 - IC) / 2)
   ftk.LS <- matrixStats::colQuantiles(x = compIC2,probs = 1 - ((1 - IC) / 2))
 
-  # ------ Plotando
-  if (plotar) {
-    #------ Grafico dinamico
-    print(dygraphs::dySeries(dygraph = dygraphs::dygraph(data = data.frame(x = 1:length(Y),
-                                                                           ft.LI = ft2.LI[, , -1],
-                                                                           ft = ft2[, , -1],
-                                                                           ft.LS = ft2.LS[, , -1],
-                                                                           Observado = Yt[, , -1]),
-                                                         main = paste("IC", round(IC * 100), "%")),
-                             name = c("ft.LI", "ft", "ft.LS"), label = "Previsao"))
-  }
-
   # ------ Resultado
   if (!logY) {
     resultado <- data.frame(obs = round(Y, 0),
@@ -300,6 +292,24 @@ MLD <- function(Y, period, plotar = FALSE, IC = .95,
                             prevk1 = c(round(exp(ft.k), 0), rep(NA, length(Y) - 1)),
                             prevk1.LI = c(round(exp(ftk.LI), 0), rep(NA, length(Y) - 1)),
                             prevk1.LS = c(round(exp(ftk.LS), 0), rep(NA, length(Y) - 1)))
+  }
+
+  #------ Encontrando posicao do outlier na serie
+  loc.out <- which(resultado$indic == 1)
+
+  # ------ Plotando
+  if (plotar)
+  {
+    #------ Grafico dinamico
+
+    print(dygraphs::dySeries(dygraph = dygraphs::dygraph(data = data.frame(x = 1:length(Y),
+                                                                           ft.LI = ft2.LI[, , - 1],
+                                                                           ft = ft2[, , - 1],
+                                                                           ft.LS = ft2.LS[, , - 1],
+                                                                           Observado = Yt[, , - 1]),
+                                                         main = paste("IC", round(IC * 100),"%")) %>%
+                             dygraphs::dyEvent(loc.out, rep("Outlier", length(loc.out)), labelLoc = "top", color="black"),
+                             name = c("ft.LI", "ft", "ft.LS"), label = "Previsao"))
   }
 
   return(resultado)
