@@ -18,9 +18,6 @@
 # Bayesian forecasting and dynamic models (WEST & HARRISON, 1997)
 # -------------------------------------------------------------- #
 
-Y <- generica('IPPC12')
-Y <- Y[,2]
-
 MLD <- function(Y, period, plotar = FALSE, IC = .95,
                 namostra = 10000, dataY = NULL,
                 Fnivel = TRUE, Ftend = TRUE, Fsaz = TRUE,
