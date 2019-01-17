@@ -15,7 +15,7 @@
 # A funcao select seleciona as variaveis de interesse
 # --------------------------------------------------------- #
 
-VarPerc <- function(data, seroutput) {
+VarPerc <- function(data, seroutput = NULL) {
 
   # Permitido somente 1 serie
   if (ncol(data) != 2) {
@@ -34,8 +34,11 @@ VarPerc <- function(data, seroutput) {
     dplyr::filter(!is.na(data$VALVALOR))
 
   # Permitido somente 1 serie
-  names(output)[2] <- seroutput
+  if (!is.null(seroutput)) {
+    names(output)[2] <- seroutput
+  }
 
   # Resultado
   return(output)
+
 }
